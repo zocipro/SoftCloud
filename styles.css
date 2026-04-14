@@ -942,83 +942,98 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     margin-left: auto;
 }
 
-/* === Mock TV (ZociTV) === */
+/* === Mock TV (SoftCloud-TV) === */
 .mock-tv {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-}
-
-.mock-search-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-full);
-}
-
-.mock-search-icon {
-    width: 14px;
-    height: 14px;
-    border: 2px solid var(--text-tertiary);
-    border-radius: 50%;
-    opacity: 0.3;
-    flex-shrink: 0;
-}
-
-.mock-search-text {
-    flex: 1;
-    height: 10px;
-    background: var(--text-tertiary);
-    opacity: 0.15;
-    border-radius: 4px;
-}
-
-.mock-movie-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 0.625rem;
 }
 
-.mock-movie-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
-    overflow: hidden;
-}
-
-.mock-poster {
+.mock-banner {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 16 / 7;
     background: var(--gradient-accent);
     border-radius: var(--radius-sm);
-    opacity: 0.25;
-}
-
-.mock-movie-card:nth-child(2) .mock-poster {
-    opacity: 0.35;
-}
-
-.mock-movie-card:nth-child(3) .mock-poster {
-    opacity: 0.2;
-}
-
-.mock-movie-card:nth-child(4) .mock-poster {
     opacity: 0.3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    position: relative;
 }
 
-.mock-movie-title {
-    width: 80%;
+.mock-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    background: var(--glass-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.mock-play-btn svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-primary);
+    margin-left: 2px;
+}
+
+.mock-banner-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mock-banner-title {
+    width: 80px;
     height: 10px;
-    background: var(--text-tertiary);
-    opacity: 0.25;
+    background: var(--text-primary);
+    opacity: 0.6;
     border-radius: 3px;
 }
 
-.mock-movie-title.short {
-    width: 55%;
+.mock-banner-sub {
+    width: 50px;
+    height: 8px;
+    background: var(--text-primary);
+    opacity: 0.3;
+    border-radius: 3px;
+}
+
+.mock-row-label {
+    width: 60px;
+    height: 10px;
+    background: var(--text-tertiary);
+    opacity: 0.3;
+    border-radius: 3px;
+}
+
+.mock-movie-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mock-thumb {
+    flex: 1;
+    aspect-ratio: 16 / 10;
+    background: var(--text-tertiary);
+    border-radius: var(--radius-sm);
+    opacity: 0.15;
+}
+
+.mock-thumb:nth-child(2) {
+    opacity: 0.22;
+}
+
+.mock-thumb:nth-child(3) {
+    opacity: 0.12;
 }
 
 /* === Footer === */
@@ -1319,10 +1334,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     .mock-next-btn {
         width: 60px;
         height: 24px;
-    }
-
-    .mock-movie-grid {
-        gap: 0.4rem;
     }
 
     /* Footer */
