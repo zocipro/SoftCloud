@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="软云网络 - 全面拥抱AI的探索者团队">
     <meta name="keywords" content="软云网络, AI, 人工智能, SoftCloud TV, SBTI人格测试, AI Todo">
     <meta name="author" content="软云网络">
@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=9">
+    <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
 </head>
 <body>
     <!-- 背景 -->
@@ -31,10 +32,21 @@
                 <img src="ruanyun.png" alt="软云网络" class="nav-logo">
                 <span>软云网络</span>
             </a>
-            <nav class="nav-links">
-                <a href="#project">项目</a>
-                <a href="#about">关于</a>
-            </nav>
+            <div class="nav-right">
+                <nav class="nav-links">
+                    <a href="#project">项目</a>
+                    <a href="#about">关于</a>
+                </nav>
+                <button class="theme-toggle" id="theme-toggle" aria-label="切换深浅主题">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -73,7 +85,7 @@
                     <p class="section-sub">全部免费，开箱即用。</p>
                 </div>
                 <div class="showcase-list">
-                    <article class="showcase reveal" style="--pa: 139, 92, 246;">
+                    <article class="showcase p-tv reveal">
                         <div class="show-info">
                             <div class="show-meta">
                                 <span class="show-index">01</span>
@@ -112,7 +124,7 @@
                             </div>
                         </div>
                     </article>
-                    <article class="showcase reveal" style="--pa: 244, 114, 182;">
+                    <article class="showcase p-sbti reveal">
                         <div class="show-info">
                             <div class="show-meta">
                                 <span class="show-index">02</span>
@@ -150,7 +162,7 @@
                             </div>
                         </div>
                     </article>
-                    <article class="showcase reveal" style="--pa: 34, 211, 238;">
+                    <article class="showcase p-todo reveal">
                         <div class="show-info">
                             <div class="show-meta">
                                 <span class="show-index">03</span>
