@@ -3,74 +3,22 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // === 元素 ===
-    const html = document.documentElement;
-    const navbar = document.getElementById('navbar');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const themeToggle = document.getElementById('theme-toggle');
-    const sections = document.querySelectorAll('section[id]');
-
-    // === 主题切换 ===
-    const getStoredTheme = () => localStorage.getItem('theme');
-    const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
-
-    const getPreferredTheme = () => {
-        const stored = getStoredTheme();
-        if (stored) return stored;
-        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    };
-
-    const setTheme = (theme) => {
-        html.setAttribute('data-theme', theme);
-        setStoredTheme(theme);
-    };
-
-    setTheme(getPreferredTheme());
-
-    themeToggle.addEventListener('click', () => {
-        const current = html.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    // 监听系统主题变化
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!getStoredTheme()) {
-            setTheme(e.matches ? 'dark' : 'light');
-        }
-    });
-
-    // === 导航栏滚动效果 ===
-    const handleScroll = () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-    };
-
-    // === 平滑滚动 ===
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
+    // === 北京时间时钟 ===
+    const clock = document.getElementById('clock');
+    if (clock) {
+        const fmt = new Intl.DateTimeFormat('zh-CN', {
+            timeZone: 'Asia/Shanghai',
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
         });
-    });
-
-    // === 导航高亮 ===
-    const setActiveLink = () => {
-        const scrollY = window.scrollY + 150;
-
-        sections.forEach(section => {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
-            const id = section.getAttribute('id');
-            const link = document.querySelector(`.nav-link[href="#${id}"]`);
-
-            if (link && scrollY >= top && scrollY < top + height) {
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-            }
-        });
-    };
+        const tick = () => {
+            clock.textContent = `北京 ${fmt.format(new Date())}`;
+        };
+        tick();
+        setInterval(tick, 1000);
+    }
 
     // === 滚动入场动画 ===
     const observer = new IntersectionObserver((entries) => {
@@ -82,36 +30,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.section-head, .project-showcase, .project-soon').forEach(el => {
-        el.classList.add('fade-in');
-        observer.observe(el);
-    });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // === 卡片光斑跟随 ===
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        document.querySelectorAll('.project-showcase').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-                card.style.setProperty('--my', `${e.clientY - rect.top}px`);
-            });
+    // === 自定义光标（仅桌面指针设备）===
+    const cursor = document.getElementById('cursor');
+    if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let tx = -100, ty = -100; // 目标位置
+        let cx = -100, cy = -100; // 当前位置
+
+        document.addEventListener('mousemove', (e) => {
+            tx = e.clientX;
+            ty = e.clientY;
+            cursor.classList.add('on');
+        });
+
+        document.addEventListener('mouseleave', () => cursor.classList.remove('on'));
+
+        const loop = () => {
+            cx += (tx - cx) * 0.18;
+            cy += (ty - cy) * 0.18;
+            cursor.style.left = `${cx}px`;
+            cursor.style.top = `${cy}px`;
+            requestAnimationFrame(loop);
+        };
+        loop();
+
+        // 悬停可点击元素时放大
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
         });
     }
-
-    // === 滚动事件 ===
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                handleScroll();
-                setActiveLink();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-
-    // === 初始化 ===
-    handleScroll();
-    setActiveLink();
 });
