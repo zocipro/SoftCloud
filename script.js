@@ -87,6 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
+    // === 卡片光斑跟随 ===
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.querySelectorAll('.project-showcase').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+            });
+        });
+    }
+
     // === 滚动事件 ===
     let ticking = false;
     window.addEventListener('scroll', () => {
