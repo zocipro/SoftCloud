@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === 卡片光斑跟随（仅桌面指针设备）===
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        document.querySelectorAll('.card').forEach(card => {
+        document.querySelectorAll('.showcase').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
