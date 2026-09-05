@@ -13,7 +13,7 @@ function createSculpture() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
+    renderer.toneMappingExposure = 1.05;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 40);
     camera.position.set(0, 0, 9.2);
@@ -21,12 +21,12 @@ function createSculpture() {
     // Studio softboxes give the metal real reflections without downloading an HDR map.
     function createEnvironment() {
         const studio = new THREE.Scene();
-        studio.background = new THREE.Color(0x24242a);
+        studio.background = new THREE.Color(0xb9d3e4);
         const softboxes = [
             { position: [-3, 3, 2], size: [3, 6], color: 0xffffff, intensity: 6 },
-            { position: [4, 1, 1], size: [2, 5], color: 0xe0e4ff, intensity: 4 },
+            { position: [4, 1, 1], size: [2, 5], color: 0xc6edff, intensity: 4 },
             { position: [0, 5, -2], size: [5, 2], color: 0xffffff, intensity: 5 },
-            { position: [-1, -4, 2], size: [4, 1], color: 0xb0b4cc, intensity: 2 },
+            { position: [-1, -4, 2], size: [4, 1], color: 0x86bfdc, intensity: 2 },
         ];
         softboxes.forEach(({ position, size, color, intensity }) => {
             const panel = new THREE.Mesh(new THREE.PlaneGeometry(...size), new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(intensity), side: THREE.DoubleSide }));
@@ -49,11 +49,11 @@ function createSculpture() {
 
     const sculpture = new THREE.Group();
     const material = new THREE.MeshPhysicalMaterial({
-        color: 0xb6b8c5, metalness: 0.94, roughness: 0.24,
-        clearcoat: 1, clearcoatRoughness: 0.14, envMapIntensity: 1.3,
+        color: 0x258daf, metalness: 0.22, roughness: 0.26,
+        clearcoat: 1, clearcoatRoughness: 0.14, envMapIntensity: 0.85,
     });
     const overlayMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0xf6f6fa, metalness: 0.15, roughness: 0.2,
+        color: 0xf8fcff, metalness: 0.04, roughness: 0.2,
         clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 1,
     });
     // Both contours are traced from ruanyun.png, including its distinctive white overlay.
@@ -72,7 +72,7 @@ function createSculpture() {
     sculpture.add(extrudeLogo(logoContours.overlay, 0.12, 0.065, overlayMaterial, 0.22));
     sculpture.rotation.set(-0.12, -0.38, -0.06);
     scene.add(sculpture);
-    scene.add(new THREE.HemisphereLight(0xf2f3ff, 0x24242e, 1.2));
+    scene.add(new THREE.HemisphereLight(0xf2faff, 0x517d9a, 1.5));
     const key = new THREE.DirectionalLight(0xffffff, 3);
     key.position.set(-3, 4, 5);
     scene.add(key);
@@ -135,7 +135,7 @@ function createSculpture() {
     reducedMotion.addEventListener('change', () => { paused = reducedMotion.matches; target.x = 0; target.y = 0; syncToggle(); syncAnimation(); });
     const syncTheme = () => {
         const light = document.documentElement.dataset.theme === 'light';
-        material.color.set(light ? 0x9093a1 : 0xb6b8c5);
+        material.color.set(light ? 0x258daf : 0x41aacf);
         render();
     };
     new MutationObserver(syncTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

@@ -4,7 +4,7 @@ const syncThemeLabel = () => themeToggle.setAttribute('aria-label', html.dataset
 syncThemeLabel();
 themeToggle.addEventListener('click', () => {
     html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem('theme', html.dataset.theme); } catch (e) { /* Theme also works when storage is unavailable. */ }
+    try { localStorage.setItem('softcloud-theme-blue', html.dataset.theme); } catch (e) { /* Theme also works when storage is unavailable. */ }
     syncThemeLabel();
 });
 const navbar = document.getElementById('navbar');
