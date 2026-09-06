@@ -3,255 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="软云网络 - 全面拥抱AI的探索者团队">
+    <meta name="description" content="软云网络，把 AI 的无限可能，做成触手可及的日常。探索 SoftCloud TV、SBTI 人格测试与 AI Todo。">
     <meta name="keywords" content="软云网络, AI, 人工智能, SoftCloud TV, SBTI人格测试, AI Todo">
     <meta name="author" content="软云网络">
-    <meta property="og:title" content="软云网络">
-    <meta property="og:description" content="全面拥抱AI的探索者团队">
+    <meta property="og:title" content="软云网络 · 让想象，成为日常">
+    <meta property="og:description" content="全面拥抱 AI 的探索者团队。把前沿技术，做成简单好用的日常产品。">
     <meta property="og:type" content="website">
-    <title>软云网络 | AI 探索者</title>
-    <link rel="icon" type="image/png" href="ruanyun.png">
-    <link rel="apple-touch-icon" href="ruanyun.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=9">
-    <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
+    <title>软云网络 · 让想象，成为日常</title>
+    <link rel="icon" type="image/png" href="assets/brand-icon.png">
+    <link rel="apple-touch-icon" href="assets/brand-icon.png">
+    <link rel="stylesheet" href="styles.css?v=13">
+    <script>try { const theme = localStorage.getItem('softcloud-theme-blue'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch (e) {}</script>
 </head>
 <body>
-    <!-- 背景 -->
-    <div class="bg" aria-hidden="true">
-        <div class="bg-glow"></div>
-        <div class="bg-grid"></div>
-    </div>
-
-    <!-- 导航栏 -->
+    <a class="skip-link" href="#project">跳转到产品</a>
+    <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+        <symbol id="arrow-up" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
+        <symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+        <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+        <symbol id="moon" viewBox="0 0 24 24"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></symbol>
+    </defs></svg>
     <header class="navbar" id="navbar">
-        <div class="nav-inner">
-            <a href="#top" class="nav-brand">
-                <img src="ruanyun.png" alt="软云网络" class="nav-logo">
-                <span>软云网络</span>
-            </a>
-            <div class="nav-right">
-                <nav class="nav-links">
-                    <a href="#project">项目</a>
-                    <a href="#about">关于</a>
-                </nav>
-                <button class="theme-toggle" id="theme-toggle" aria-label="切换深浅主题">
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-                    </svg>
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                </button>
-            </div>
+        <div class="container nav-inner">
+            <a class="brand" href="#top" aria-label="软云网络，返回顶部"><img src="assets/brand-icon.png" width="34" height="34" alt=""><span>softcloud<span class="brand-period">.</span></span><span class="brand-cn">软云网络</span></a>
+            <nav class="nav-links" aria-label="主导航"><a href="#project">探索产品 <span>03</span></a><a href="#about">关于我们</a></nav>
+            <div class="nav-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换为深色主题"><svg class="icon-sun"><use href="#sun"/></svg><svg class="icon-moon"><use href="#moon"/></svg></button><a class="nav-cta" href="#project">即刻探索 <svg><use href="#arrow-up"/></svg></a></div>
         </div>
     </header>
-
     <main id="top">
-        <!-- 首屏 -->
-        <section class="hero">
-            <div class="hero-inner">
-                <div class="hero-badge reveal">
-                    <span class="badge-dot"></span>
-                    全面拥抱 AI 的探索者团队
-                </div>
-                <h1 class="hero-title reveal">
-                    用 AI 创造<br>有价值的产品
-                </h1>
-                <p class="hero-sub reveal">
-                    我们是软云网络，热衷于探索人工智能的无限可能，
-                    把前沿技术打磨成简单好用的日常工具。
-                </p>
-                <div class="hero-actions reveal">
-                    <a href="#project" class="btn btn-primary">
-                        查看项目
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                    </a>
-                    <a href="#about" class="btn btn-ghost">了解我们</a>
-                </div>
+        <section class="hero container" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow"><span class="status-dot"></span> INDEPENDENT MINDS. INFINITE POSSIBILITIES.</p>
+                <h1 id="hero-title">让想象，<br><span>成为日常。</span></h1>
+                <p class="hero-description">我们是软云网络，一群拥抱 AI 的探索者。<br>把前沿技术的无限可能，做成简单好用的日常。</p>
+                <div class="hero-actions"><a class="button-primary" href="#project">探索我们的产品 <svg><use href="#arrow-up"/></svg></a><a class="text-link" href="#about">认识软云 <span>↗</span></a></div>
+                <div class="hero-footnote"><span class="tiny-cross">+</span><span>好奇心驱动 · 为每个人创造</span></div>
             </div>
-            <div class="hero-horizon" aria-hidden="true"></div>
-        </section>
-
-        <!-- 项目 -->
-        <section class="section" id="project">
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="eyebrow">项目</span>
-                    <h2 class="section-title">三个产品，三种探索</h2>
-                    <p class="section-sub">全部免费，开箱即用。</p>
-                </div>
-                <div class="showcase-list">
-                    <article class="showcase p-tv reveal">
-                        <div class="show-info">
-                            <div class="show-meta">
-                                <span class="show-index">01</span>
-                                <span class="show-tag">在线影视</span>
-                            </div>
-                            <h3 class="show-name">SoftCloud TV</h3>
-                            <p class="show-tagline">免费在线影视平台</p>
-                            <p class="show-desc">
-                                打开网页就能看电影、追剧：海量影视资源在线直接播放，
-                                高清流畅，而且完全免费、没有广告。
-                            </p>
-                            <ul class="show-feats">
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>电影、剧集资源海量齐全</li>
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>高清播放，流畅不卡顿</li>
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>完全免费，没有广告</li>
-                            </ul>
-                            <a href="https://tv.zoci.pro" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                访问 SoftCloud TV
-                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                            </a>
-                        </div>
-                        <div class="show-preview">
-                            <div class="mock-window">
-                                <div class="mock-head">
-                                    <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-                                    <span class="mock-url">tv.zoci.pro</span>
-                                </div>
-                                <div class="mock-body">
-                                    <div class="mock-banner">
-                                        <span class="mock-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-                                    </div>
-                                    <div class="mock-thumbs">
-                                        <span></span><span></span><span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="showcase p-sbti reveal">
-                        <div class="show-info">
-                            <div class="show-meta">
-                                <span class="show-index">02</span>
-                                <span class="show-tag">人格探索</span>
-                            </div>
-                            <h3 class="show-name">SBTI 人格测试</h3>
-                            <p class="show-tagline">在线人格类型测试</p>
-                            <p class="show-desc">
-                                花几分钟回答一组问题，从四个维度分析你的人格类型，
-                                生成一份详细的性格报告，帮你更了解自己。
-                            </p>
-                            <ul class="show-feats">
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>四个维度全面分析人格</li>
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>性格报告详细易懂</li>
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>在线免费测试</li>
-                            </ul>
-                            <a href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                访问 SBTI 人格测试
-                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                            </a>
-                        </div>
-                        <div class="show-preview">
-                            <div class="mock-window">
-                                <div class="mock-head">
-                                    <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-                                    <span class="mock-url">sbti.zoci.pro</span>
-                                </div>
-                                <div class="mock-body">
-                                    <div class="mock-progress"><span></span></div>
-                                    <div class="mock-line w70"></div>
-                                    <div class="mock-option selected"><span class="radio"></span><span class="bar w60"></span></div>
-                                    <div class="mock-option"><span class="radio"></span><span class="bar w80"></span></div>
-                                    <div class="mock-option"><span class="radio"></span><span class="bar w50"></span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="showcase p-todo reveal">
-                        <div class="show-info">
-                            <div class="show-meta">
-                                <span class="show-index">03</span>
-                                <span class="show-tag">AI 驱动</span>
-                            </div>
-                            <h3 class="show-name">AI Todo</h3>
-                            <p class="show-tagline">AI 智能待办清单</p>
-                            <p class="show-desc">
-                                把要做的事记下来，AI 帮你分析任务、自动排好优先级，
-                                手机电脑多端同步，每天该做什么一目了然。
-                            </p>
-                            <ul class="show-feats">
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>AI 智能分析任务</li>
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>自动安排优先级</li>
-                                <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg>手机电脑多端同步</li>
-                            </ul>
-                            <a href="https://aitodo.zoci.pro" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                访问 AI Todo
-                                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-                            </a>
-                        </div>
-                        <div class="show-preview">
-                            <div class="mock-window">
-                                <div class="mock-head">
-                                    <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
-                                    <span class="mock-url">aitodo.zoci.pro</span>
-                                </div>
-                                <div class="mock-body">
-                                    <div class="mock-item done"><span class="check"></span><span class="bar w70"></span></div>
-                                    <div class="mock-item done"><span class="check"></span><span class="bar w50"></span></div>
-                                    <div class="mock-item"><span class="check"></span><span class="bar w80"></span></div>
-                                    <div class="mock-item"><span class="check"></span><span class="bar w60"></span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+            <div class="hero-visual" id="hero-visual">
+                <div class="scene-halo" aria-hidden="true"></div>
+                <div class="scene-fallback" id="scene-fallback" aria-hidden="true"><img src="assets/brand-icon.png" width="180" height="180" alt=""></div>
+                <canvas id="sculpture" aria-hidden="true"></canvas>
+                <div class="scene-topline" aria-hidden="true"><span>SC — THE ORIGINAL MARK</span><span>✳</span></div>
+                <div class="scene-label" aria-hidden="true"><span class="status-dot"></span> SOFTCLOUD / ORIGINAL</div>
+                <div class="scene-bottomline"><span aria-hidden="true">IDEA <span class="line-arrow">⟶</span> REALITY</span><button id="motion-toggle" type="button" aria-pressed="false" aria-label="暂停 3D 动画" hidden><span class="motion-icon">Ⅱ</span><span id="motion-label">暂停动画</span></button></div>
             </div>
+            <div class="hero-bottom"><p><span class="status-dot"></span> 3 款产品 · 自由探索，免费使用</p><a href="#project">向下发现 <span>↓</span></a></div>
         </section>
-
-        <!-- 关于 -->
-        <section class="section about" id="about">
-            <div class="container">
-                <div class="about-box reveal">
-                    <span class="eyebrow">关于我们</span>
-                    <p class="about-statement">
-                        AI 不该只是噱头，<br>而应成为人人可用的日常工具。
-                    </p>
-                    <p class="about-text">
-                        软云网络是一支全面拥抱 AI 的探索者团队。从影视娱乐到自我认知，再到效率工具，
-                        我们把每一次探索都做成完整的产品，并且永久免费 —— 好的技术，应该被更多人用上。
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-num">03</span>
-                            <span class="stat-label">上线产品</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-num">100%</span>
-                            <span class="stat-label">免费使用</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-num">&infin;</span>
-                            <span class="stat-label">探索可能</span>
-                        </div>
+        <section class="projects section container" id="project" aria-labelledby="projects-title">
+            <div class="section-heading reveal">
+                <div><p class="eyebrow">01 / 我们的产品</p><h2 id="projects-title">看电影，测人格，<span>理清待办。</span></h2></div>
+                <p>选一个你现在用得上的，<br>看看它具体能帮你做什么。</p>
+            </div>
+            <div class="product-grid">
+                <article class="product-card reveal">
+                    <div class="product-body">
+                        <p class="product-meta"><span class="product-index">01</span> SoftCloud TV <span class="product-category">在线影视</span></p>
+                        <h3>打开网页，看电影和电视剧</h3>
+                        <p class="product-description">一个在线影视入口，想看电影或追剧时，打开网页就能在线观看。</p>
+                        <ul class="product-features"><li>电影与电视剧，集中在一个观看入口</li><li>在浏览器中直接播放</li></ul>
+                        <a class="product-cta" href="https://tv.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="去 SoftCloud TV 观看影视（新窗口打开）">去看电影、追剧 <svg><use href="#arrow-up"/></svg></a>
+                        <span class="product-domain">tv.zoci.pro</span>
                     </div>
-                </div>
+                    <figure class="product-demo tv-demo">
+                        <figcaption><span>SoftCloud TV</span><span>功能示意</span></figcaption>
+                        <div class="demo-content" aria-hidden="true">
+                            <div class="demo-catalog"><span class="selected">电影</span><span>电视剧</span><span>在线影视</span></div>
+                            <div class="demo-flow"><span><b>1</b> 进入网站</span><i>→</i><span><b>2</b> 打开影片</span><i>→</i><span><b>3</b> 在线播放</span></div>
+                            <div class="demo-player"><span class="demo-play">▶</span><strong>在浏览器中直接观看</strong><div class="demo-player-bottom"><span>▶</span><span class="demo-player-track"><i></i></span></div></div>
+                            <p class="demo-note">想看电影或追剧，从同一个入口开始。</p>
+                        </div>
+                    </figure>
+                </article>
+                <article class="product-card reveal">
+                    <div class="product-body">
+                        <p class="product-meta"><span class="product-index">02</span> SBTI 人格测试 <span class="product-category">趣味测试</span></p>
+                        <h3>答一组题，看看你是哪种人格</h3>
+                        <p class="product-description">根据日常想法和习惯作答，得到你的趣味人格类型、匹配度与性格解读。</p>
+                        <ul class="product-features"><li>完成问卷，查看主类型和对应解读</li><li>用 15 个维度呈现你的答题倾向</li></ul>
+                        <a class="product-cta" href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="开始 SBTI 趣味人格测试（新窗口打开）">开始人格测试 <svg><use href="#arrow-up"/></svg></a>
+                        <span class="product-domain">sbti.zoci.pro</span>
+                    </div>
+                    <figure class="product-demo sbti-demo">
+                        <figcaption><span>SBTI 人格测试</span><span>结果示意</span></figcaption>
+                        <div class="demo-content" aria-hidden="true">
+                            <div class="report-heading"><span>完成问卷后，你会得到</span><span class="report-stamp">趣味人格报告</span></div>
+                            <div class="report-type"><div><span>你的主类型</span><strong>CTRL <em>拿捏者</em></strong></div><div class="report-match"><strong>92<span>%</span></strong><span>示例匹配度</span></div></div>
+                            <div class="report-sections"><span>人格解读</span><span class="selected">15 维度评分</span></div>
+                            <div class="report-models"><span>自我</span><span>情感</span><span>态度</span><span>行动驱力</span><span>社交</span></div>
+                            <div class="report-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                            <p class="demo-note">类型 + 匹配度 + 解读，看看你更像哪一种。</p>
+                        </div>
+                    </figure>
+                </article>
+                <article class="product-card reveal">
+                    <div class="product-body">
+                        <p class="product-meta"><span class="product-index">03</span> AI Todo <span class="product-category">待办清单</span></p>
+                        <h3>随手记一句，AI 帮你整理待办</h3>
+                        <p class="product-description">写下要做的事，让 AI 整理任务标题、标出优先级并归类，再逐项完成。</p>
+                        <ul class="product-features"><li>支持截止日期，筛选进行中与已完成任务</li><li>登录账号，保存和同步你的待办</li></ul>
+                        <a class="product-cta" href="https://aitodo.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="打开 AI Todo 创建待办（新窗口打开）">去创建待办 <svg><use href="#arrow-up"/></svg></a>
+                        <span class="product-domain">aitodo.zoci.pro · 需登录</span>
+                    </div>
+                    <figure class="product-demo todo-demo">
+                        <figcaption><span>AI Todo</span><span>功能示意</span></figcaption>
+                        <div class="demo-content" aria-hidden="true">
+                            <p class="demo-step-label">你只需要记下来</p>
+                            <div class="todo-input">准备会议资料，这件事比较重要</div>
+                            <div class="todo-transform"><span>↓</span> AI 整理标题、优先级与分类</div>
+                            <div class="todo-result"><span class="todo-checkbox"></span><div><strong>准备会议资料</strong><div class="todo-result-tags"><span>高优先级</span><span>工作</span></div></div></div>
+                            <div class="todo-completed"><span>✓</span><span>整理会议笔记</span><span>已完成</span></div>
+                            <p class="demo-note">要做的事和完成的事，一目了然。</p>
+                        </div>
+                    </figure>
+                </article>
             </div>
+        </section>
+        <section class="about section container" id="about" aria-labelledby="about-title">
+            <div class="about-intro reveal"><p class="eyebrow">02 / THE WAY WE THINK</p><span class="about-symbol" aria-hidden="true">✳</span></div>
+            <div class="about-content reveal"><h2 id="about-title">技术的意义，<br>在于<span>与你有关。</span></h2><p>我们相信，AI 应该走进日常。<br>从一部电影、一次自我发现，到一个井然有序的今天，<br class="desktop-break">我们把每一次探索，做成用得上的产品。</p><p class="about-belief">保持好奇，持续创造。好的技术，应该被更多人用上。</p><div class="about-stats"><div><strong>03<span>↗</span></strong><span>上线产品</span></div><div><strong>100<span>%</span></strong><span>免费使用</span></div><div><strong>∞</strong><span>探索可能</span></div></div></div>
         </section>
     </main>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <div class="footer-left">
-                <a href="#top" class="nav-brand">
-                    <img src="ruanyun.png" alt="软云网络" class="nav-logo">
-                    <span>软云网络</span>
-                </a>
-                <p class="footer-copy">&copy; 2026 软云网络 &middot; 用 AI 创造价值</p>
-            </div>
-            <nav class="footer-links">
-                <a href="https://tv.zoci.pro" target="_blank" rel="noopener noreferrer">SoftCloud TV</a>
-                <a href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer">SBTI 人格测试</a>
-                <a href="https://aitodo.zoci.pro" target="_blank" rel="noopener noreferrer">AI Todo</a>
-            </nav>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <footer class="footer container"><div class="footer-top"><a href="#top" class="footer-wordmark" aria-label="软云网络，返回顶部">softcloud<span>®</span></a><a href="#top" class="back-top" aria-label="返回顶部">↑</a></div><div class="footer-bottom"><p>© 2026 软云网络 · 用 AI 创造价值</p><nav aria-label="产品链接"><a href="https://tv.zoci.pro" target="_blank" rel="noopener noreferrer">SoftCloud TV ↗</a><a href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer">SBTI ↗</a><a href="https://aitodo.zoci.pro" target="_blank" rel="noopener noreferrer">AI Todo ↗</a></nav><span>MADE OF CURIOSITY.</span></div></footer>
+    <script src="script.js?v=12" defer></script>
+    <script type="module" src="scene.js?v=12"></script>
 </body>
 </html>
