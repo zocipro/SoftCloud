@@ -12,7 +12,7 @@
     <title>软云网络 · 让想象，成为日常</title>
     <link rel="icon" type="image/png" href="assets/brand-icon.png">
     <link rel="apple-touch-icon" href="assets/brand-icon.png">
-    <link rel="stylesheet" href="styles.css?v=14">
+    <link rel="stylesheet" href="styles.css?v=15">
     <script>try { const theme = localStorage.getItem('softcloud-theme-blue'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch (e) {}</script>
 </head>
 <body>
@@ -20,8 +20,6 @@
     <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
         <symbol id="arrow-up" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
         <symbol id="asterisk" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07 19.07 4.93" stroke-width="2.2" stroke-linecap="butt"/></symbol>
-        <symbol id="play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
-        <symbol id="pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
         <symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
         <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
         <symbol id="moon" viewBox="0 0 24 24"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></symbol>
@@ -46,10 +44,10 @@
                 <div class="scene-halo" aria-hidden="true"></div>
                 <div class="scene-fallback" id="scene-fallback" aria-hidden="true"><img src="assets/brand-icon.png" width="180" height="180" alt=""></div>
                 <canvas id="sculpture" role="img" aria-label="可旋转的软云 3D Logo" aria-describedby="rotation-help" tabindex="-1"></canvas>
-                <span id="rotation-help" class="sr-only">鼠标拖动或手指左右滑动旋转。聚焦后可用方向键调整角度，Home 键恢复初始角度。</span>
+                <span id="rotation-help" class="sr-only">鼠标拖动或手指左右滑动调整角度，Logo 会持续在正面范围内自动转动。聚焦后可用方向键调整，Home 键恢复默认方向。</span>
                 <div class="scene-topline" aria-hidden="true"><span>SC — THE ORIGINAL MARK</span><svg aria-hidden="true" focusable="false"><use href="#asterisk"/></svg></div>
                 <div class="scene-label" aria-hidden="true"><span class="status-dot"></span> SOFTCLOUD / ORIGINAL</div>
-                <div class="scene-bottomline"><span class="rotation-hint" aria-hidden="true"><span class="drag-desktop">拖动旋转</span><span class="drag-touch">左右滑动旋转</span></span><button id="motion-toggle" type="button" aria-pressed="false" aria-label="暂停自动旋转" hidden><svg class="motion-icon" aria-hidden="true" focusable="false"><use href="#pause"/></svg><span id="motion-label">暂停旋转</span></button></div>
+                <div class="scene-bottomline"><span class="rotation-hint" aria-hidden="true"><span class="drag-desktop">拖动调整角度</span><span class="drag-touch">左右滑动调整角度</span></span></div>
             </div>
             <div class="hero-bottom"><p><span class="status-dot"></span> 3 款产品 · 自由探索，免费使用</p><a href="#project">向下发现 <span>↓</span></a></div>
         </section>
@@ -129,6 +127,6 @@
     </main>
     <footer class="footer container"><div class="footer-top"><a href="#top" class="footer-wordmark" aria-label="软云网络，返回顶部">softcloud<span>®</span></a><a href="#top" class="back-top" aria-label="返回顶部">↑</a></div><div class="footer-bottom"><p>© 2026 软云网络 · 用 AI 创造价值</p><nav aria-label="产品链接"><a href="https://tv.zoci.pro" target="_blank" rel="noopener noreferrer">SoftCloud TV <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a><a href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer">SBTI <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a><a href="https://aitodo.zoci.pro" target="_blank" rel="noopener noreferrer">AI Todo <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a></nav><span>MADE OF CURIOSITY.</span></div></footer>
     <script src="script.js?v=12" defer></script>
-    <script type="module" src="scene.js?v=14"></script>
+    <script type="module" src="scene.js?v=15"></script>
 </body>
 </html>

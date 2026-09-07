@@ -81,8 +81,6 @@ h1 > span { color: var(--hero-gray); background: linear-gradient(115deg, var(--h
 .scene-topline, .scene-bottomline { position: absolute; left: 10%; right: 2%; display: flex; align-items: center; justify-content: space-between; z-index: 2; font-size: 12px; letter-spacing: 1.4px; color: var(--subtle); }
 .scene-topline { top: 35px; } .scene-topline > svg { width: 24px; height: 24px; color: var(--muted); }
 .scene-bottomline { bottom: 55px; pointer-events: none; }
-.scene-bottomline button { pointer-events: auto; border: 0; background: none; color: var(--muted); padding: 10px 0 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 12px; }
-.motion-icon { width: 16px; height: 16px; }
 .scene-label { position: absolute; z-index: 2; top: 64%; right: 0; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border); padding: 9px 13px; background: var(--nav); backdrop-filter: blur(12px); border-radius: 5px; font-size: 12px; letter-spacing: 1px; }
 .hero-bottom { align-self: end; grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; letter-spacing: .5px; }
 .hero-bottom p { display: flex; align-items: center; gap: 10px; } .hero-bottom a { display: flex; gap: 25px; align-items: center; } .hero-bottom a span { font-size: 18px; }
