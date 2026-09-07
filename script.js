@@ -25,3 +25,35 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
         observer.observe(element);
     });
 }
+
+// Let the lightweight loading treatment paint before initializing the 3D scene.
+const sceneHost = document.getElementById('hero-visual');
+if (sceneHost) {
+    let loadingTimeout;
+    const syncLoadingTimeout = () => {
+        clearTimeout(loadingTimeout);
+        if (sceneHost.dataset.sceneState === 'loading' && !document.hidden) {
+            loadingTimeout = setTimeout(() => {
+                if (!document.hidden && sceneHost.dataset.sceneState === 'loading') setSceneState('unavailable');
+            }, 15000);
+        }
+    };
+    const setSceneState = (state) => {
+        sceneHost.dataset.sceneState = state;
+        sceneHost.classList.toggle('ready', state === 'ready');
+        sceneHost.setAttribute('aria-busy', String(state === 'loading'));
+        document.getElementById('sculpture').tabIndex = state === 'ready' ? 0 : -1;
+        syncLoadingTimeout();
+    };
+    document.addEventListener('visibilitychange', syncLoadingTimeout);
+    setSceneState('loading');
+    requestAnimationFrame(() => requestAnimationFrame(async () => {
+        try {
+            const { createSculpture } = await import('./scene.js?v=16');
+            createSculpture(setSceneState);
+        } catch (error) {
+            setSceneState('unavailable');
+            console.warn('3D visual unavailable; static view retained.', error);
+        }
+    }));
+}
