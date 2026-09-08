@@ -49,7 +49,7 @@ if (sceneHost) {
     setSceneState('loading');
     requestAnimationFrame(() => requestAnimationFrame(async () => {
         try {
-            const { createSculpture } = await import('./scene.js?v=16');
+            const { createSculpture } = await import('./scene.js?v=17');
             createSculpture(setSceneState);
         } catch (error) {
             setSceneState('unavailable');

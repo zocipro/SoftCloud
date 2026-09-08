@@ -1,5 +1,6 @@
 import * as THREE from './vendor/three.module.min.js';
 import logoContours from './assets/logo-shapes.js';
+import { createLogoMotion } from './assets/logo-motion.js';
 
 const host = document.getElementById('hero-visual');
 const canvas = document.getElementById('sculpture');
@@ -68,12 +69,7 @@ export function createSculpture(setState) {
     }
     sculpture.add(extrudeLogo(logoContours.body, 0.42, 0.10, material, -0.25));
     sculpture.add(extrudeLogo(logoContours.overlay, 0.12, 0.065, overlayMaterial, 0.22));
-    const homeRotation = { x: -0.12, y: -0.38 };
-    const rotationCenter = { ...homeRotation };
-    const targetCenter = { ...homeRotation };
-    const velocity = { x: 0, y: 0 };
-    const rotationLimits = { x: THREE.MathUtils.degToRad(22), y: THREE.MathUtils.degToRad(50) };
-    const sway = { x: THREE.MathUtils.degToRad(2), y: THREE.MathUtils.degToRad(8) };
+    const motion = createLogoMotion(reducedMotion.matches);
     scene.add(sculpture);
     scene.add(new THREE.HemisphereLight(0xf2faff, 0x517d9a, 1.5));
     const key = new THREE.DirectionalLight(0xffffff, 3);
@@ -83,24 +79,16 @@ export function createSculpture(setState) {
     let frame = 0;
     let revealFrame = 0;
     let lastTime = 0;
-    let phase = 0;
     let visible = true;
     let contextLost = false;
     let failed = false;
     let revealed = false;
     let drag = null;
-    const friction = 7.5;
-    const response = 22;
-    const canAnimate = () => !reducedMotion.matches && visible && !document.hidden && !contextLost && !failed;
-    const clampCenter = (value, axis) => THREE.MathUtils.clamp(value, -rotationLimits[axis] + sway[axis], rotationLimits[axis] - sway[axis]);
-    function stopMomentum() {
-        velocity.x = velocity.y = 0;
-        Object.assign(targetCenter, rotationCenter);
-    }
+    const canAnimate = () => visible && !document.hidden && !contextLost && !failed;
     function failScene(error) {
         failed = true;
         finishDrag();
-        stopMomentum();
+        motion.cancel();
         cancelAnimationFrame(frame);
         cancelAnimationFrame(revealFrame);
         frame = revealFrame = 0;
@@ -109,14 +97,9 @@ export function createSculpture(setState) {
     }
     const render = () => {
         if (contextLost || failed) return;
-        // Every input shares absolute limits, so the logo's front always faces the camera.
-        sculpture.rotation.set(
-            THREE.MathUtils.clamp(rotationCenter.x + Math.sin(phase * 0.42) * sway.x, -rotationLimits.x, rotationLimits.x),
-            THREE.MathUtils.clamp(rotationCenter.y + Math.sin(phase * 0.3) * sway.y, -rotationLimits.y, rotationLimits.y),
-            -0.06 + Math.sin(phase * 0.24) * 0.025,
-            'YXZ',
-        );
-        sculpture.position.y = Math.sin(phase * 0.7) * 0.07;
+        const pose = motion.sample();
+        sculpture.rotation.set(pose.x, pose.y, pose.z, 'YXZ');
+        sculpture.position.set(pose.floatX, pose.floatY, 0);
         try { renderer.render(scene, camera); } catch (error) { failScene(error); return; }
         if (!revealed && !revealFrame) {
             // Reveal only after a real frame has been drawn; the original image is error-only.
@@ -128,33 +111,12 @@ export function createSculpture(setState) {
             });
         }
     };
-    function advanceMotion(delta) {
-        const decay = Math.exp(-friction * delta);
-        const follow = Math.exp(-response * delta);
-        for (const axis of ['x', 'y']) {
-            const oldTarget = targetCenter[axis];
-            const speed = drag ? 0 : velocity[axis];
-            const nextTarget = oldTarget + speed * (1 - decay) / friction;
-            targetCenter[axis] = clampCenter(nextTarget, axis);
-            if (targetCenter[axis] !== nextTarget) {
-                velocity[axis] = 0;
-                rotationCenter[axis] = THREE.MathUtils.damp(rotationCenter[axis], targetCenter[axis], response, delta);
-            } else {
-                // Exact damped follow of an exponentially slowing target, independent of refresh rate.
-                rotationCenter[axis] = targetCenter[axis] + (rotationCenter[axis] - oldTarget) * follow
-                    - speed * (decay - follow) / (response - friction);
-                velocity[axis] = Math.abs(speed * decay) < 0.001 ? 0 : speed * decay;
-            }
-            rotationCenter[axis] = clampCenter(rotationCenter[axis], axis);
-        }
-    }
     function animate(time) {
         frame = 0;
         if (!canAnimate()) return;
         const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 0;
         lastTime = time;
-        phase += delta;
-        advanceMotion(delta);
+        motion.step(delta);
         render();
         if (canAnimate()) frame = requestAnimationFrame(animate);
     }
@@ -177,38 +139,27 @@ export function createSculpture(setState) {
     new ResizeObserver(resize).observe(host);
     new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
-        if (!visible) { finishDrag(); stopMomentum(); }
+        if (!visible) { finishDrag(); motion.cancel(); }
         syncAnimation();
     }, { threshold: 0 }).observe(host);
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) { finishDrag(); stopMomentum(); }
+        if (document.hidden) { finishDrag(); motion.cancel(); }
         syncAnimation();
     });
     function finishDrag(event) {
         if (!drag || (event && event.pointerId !== drag.pointerId)) return;
         const { pointerId } = drag;
         const release = event?.type === 'pointerup';
-        if (release && drag.started && !reducedMotion.matches && event.timeStamp - drag.time < 90) {
-            velocity.x = drag.vx;
-            velocity.y = drag.vy;
-        } else if (release) {
-            velocity.x = velocity.y = 0;
-        } else stopMomentum();
+        if (release && drag.started && event.timeStamp - drag.time < 110) motion.release(drag.vx, drag.vy);
+        else if (release) motion.release(0, 0);
+        else motion.cancel();
         drag = null;
         interaction.classList.remove('is-dragging');
         if (interaction.hasPointerCapture(pointerId)) interaction.releasePointerCapture(pointerId);
     }
-    function moveTarget(x, y) {
-        targetCenter.y = clampCenter(targetCenter.y + x, 'y');
-        targetCenter.x = clampCenter(targetCenter.x + y, 'x');
-        if (reducedMotion.matches) {
-            Object.assign(rotationCenter, targetCenter);
-            render();
-        }
-    }
     interaction.addEventListener('pointerdown', (event) => {
         if (!event.isPrimary || event.button !== 0 || drag || contextLost || failed || !revealed) return;
-        stopMomentum();
+        motion.begin();
         drag = { pointerId: event.pointerId, type: event.pointerType, startX: event.clientX, startY: event.clientY, x: event.clientX, y: event.clientY, time: event.timeStamp, vx: 0, vy: 0, started: false };
         interaction.setPointerCapture(event.pointerId);
         interaction.classList.add('is-dragging');
@@ -220,17 +171,14 @@ export function createSculpture(setState) {
             if (Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < 4) return;
             drag.started = true;
         }
-        const scale = Math.PI / Math.max(canvas.getBoundingClientRect().width, 1);
-        const dx = (event.clientX - drag.x) * scale, dy = (event.clientY - drag.y) * scale;
-        const previous = { ...targetCenter };
-        moveTarget(dx, dy);
+        const scale = 1.35 / Math.max(canvas.getBoundingClientRect().width, 1);
+        const dx = (event.clientX - drag.x) * scale, dy = (event.clientY - drag.y) * scale * 0.65;
+        motion.move(dy, dx);
         const delta = Math.max((event.timeStamp - drag.time) / 1000, 1 / 240);
-        for (const [axis, movement, speedKey] of [['x', dy, 'vx'], ['y', dx, 'vy']]) {
-            const actual = targetCenter[axis] - previous[axis];
-            const speed = THREE.MathUtils.clamp(actual / delta, -1.8, 1.8);
-            if (Math.abs(actual - movement) > 1e-8) drag[speedKey] = 0;
-            else if (delta > 0.12 || drag[speedKey] * speed < 0) drag[speedKey] = speed;
-            else drag[speedKey] = THREE.MathUtils.damp(drag[speedKey], speed, 30, delta);
+        for (const [movement, speedKey] of [[dy, 'vx'], [dx, 'vy']]) {
+            const speed = THREE.MathUtils.clamp(movement / delta, -2.4, 2.4);
+            if (delta > 0.12 || drag[speedKey] * speed < 0) drag[speedKey] = speed;
+            else drag[speedKey] = THREE.MathUtils.damp(drag[speedKey], speed, 35, delta);
         }
         drag.x = event.clientX;
         drag.y = event.clientY;
@@ -238,7 +186,7 @@ export function createSculpture(setState) {
     }, { passive: true });
     ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((event) => interaction.addEventListener(event, finishDrag));
     interaction.addEventListener('contextmenu', (event) => event.preventDefault());
-    window.addEventListener('blur', () => { finishDrag(); stopMomentum(); });
+    window.addEventListener('blur', () => { finishDrag(); motion.cancel(); });
     canvas.addEventListener('keydown', (event) => {
         if (contextLost || failed || event.altKey || event.ctrlKey || event.metaKey) return;
         const step = Math.PI / 18;
@@ -246,17 +194,13 @@ export function createSculpture(setState) {
         if (!directions[event.key] && event.key !== 'Home') return;
         event.preventDefault();
         finishDrag();
-        velocity.x = velocity.y = 0;
-        if (event.key === 'Home') {
-            Object.assign(targetCenter, homeRotation);
-            if (reducedMotion.matches) { Object.assign(rotationCenter, targetCenter); render(); }
-        } else moveTarget(...directions[event.key]);
+        if (event.key === 'Home') motion.reset();
+        else {
+            const [yaw, pitch] = directions[event.key];
+            motion.nudge(pitch, yaw);
+        }
     });
-    reducedMotion.addEventListener('change', () => {
-        finishDrag();
-        stopMomentum();
-        syncAnimation();
-    });
+    reducedMotion.addEventListener('change', () => motion.setReduced(reducedMotion.matches));
     const syncTheme = () => {
         const light = document.documentElement.dataset.theme === 'light';
         material.color.set(light ? 0x258daf : 0x41aacf);
@@ -268,7 +212,7 @@ export function createSculpture(setState) {
         contextLost = true;
         revealed = false;
         finishDrag();
-        stopMomentum();
+        motion.cancel();
         cancelAnimationFrame(revealFrame);
         revealFrame = 0;
         setState('loading');
