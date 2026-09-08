@@ -1,11 +1,13 @@
 import * as THREE from './vendor/three.module.min.js';
 import logoContours from './assets/logo-shapes.js';
+import { createLogoMotion } from './assets/logo-motion.js';
 
 const host = document.getElementById('hero-visual');
 const canvas = document.getElementById('sculpture');
+const interaction = document.getElementById('rotation-surface');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-function createSculpture() {
+export function createSculpture(setState) {
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     renderer.setClearColor(0x000000, 0);
@@ -67,10 +69,7 @@ function createSculpture() {
     }
     sculpture.add(extrudeLogo(logoContours.body, 0.42, 0.10, material, -0.25));
     sculpture.add(extrudeLogo(logoContours.overlay, 0.12, 0.065, overlayMaterial, 0.22));
-    const homeRotation = { x: -0.12, y: -0.38 };
-    const rotationCenter = { ...homeRotation };
-    const rotationLimits = { x: THREE.MathUtils.degToRad(22), y: THREE.MathUtils.degToRad(50) };
-    const sway = { x: THREE.MathUtils.degToRad(2), y: THREE.MathUtils.degToRad(8) };
+    const motion = createLogoMotion(reducedMotion.matches);
     scene.add(sculpture);
     scene.add(new THREE.HemisphereLight(0xf2faff, 0x517d9a, 1.5));
     const key = new THREE.DirectionalLight(0xffffff, 3);
@@ -78,32 +77,48 @@ function createSculpture() {
     scene.add(key);
 
     let frame = 0;
+    let revealFrame = 0;
     let lastTime = 0;
-    let phase = 0;
     let visible = true;
     let contextLost = false;
+    let failed = false;
+    let revealed = false;
     let drag = null;
-    const canAnimate = () => !reducedMotion.matches && visible && !document.hidden && !contextLost;
+    const canAnimate = () => visible && !document.hidden && !contextLost && !failed;
+    function failScene(error) {
+        failed = true;
+        finishDrag();
+        motion.cancel();
+        cancelAnimationFrame(frame);
+        cancelAnimationFrame(revealFrame);
+        frame = revealFrame = 0;
+        setState('unavailable');
+        console.warn('3D visual unavailable; static view retained.', error);
+    }
     const render = () => {
-        if (contextLost) return;
-        // Every input shares absolute limits, so the logo's front always faces the camera.
-        sculpture.rotation.set(
-            THREE.MathUtils.clamp(rotationCenter.x + Math.sin(phase * 0.42) * sway.x, -rotationLimits.x, rotationLimits.x),
-            THREE.MathUtils.clamp(rotationCenter.y + Math.sin(phase * 0.3) * sway.y, -rotationLimits.y, rotationLimits.y),
-            -0.06 + Math.sin(phase * 0.24) * 0.025,
-            'YXZ',
-        );
-        sculpture.position.y = Math.sin(phase * 0.7) * 0.07;
-        renderer.render(scene, camera);
+        if (contextLost || failed) return;
+        const pose = motion.sample();
+        sculpture.rotation.set(pose.x, pose.y, pose.z, 'YXZ');
+        sculpture.position.set(pose.floatX, pose.floatY, 0);
+        try { renderer.render(scene, camera); } catch (error) { failScene(error); return; }
+        if (!revealed && !revealFrame) {
+            // Reveal only after a real frame has been drawn; the original image is error-only.
+            revealFrame = requestAnimationFrame(() => {
+                revealFrame = 0;
+                if (contextLost || failed) return;
+                revealed = true;
+                setState('ready');
+            });
+        }
     };
     function animate(time) {
         frame = 0;
         if (!canAnimate()) return;
         const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 0;
         lastTime = time;
-        phase += delta;
+        motion.step(delta);
         render();
-        frame = requestAnimationFrame(animate);
+        if (canAnimate()) frame = requestAnimationFrame(animate);
     }
     const syncAnimation = () => {
         if (frame) cancelAnimationFrame(frame);
@@ -124,62 +139,68 @@ function createSculpture() {
     new ResizeObserver(resize).observe(host);
     new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
-        if (!visible) finishDrag();
+        if (!visible) { finishDrag(); motion.cancel(); }
         syncAnimation();
     }, { threshold: 0 }).observe(host);
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) finishDrag();
+        if (document.hidden) { finishDrag(); motion.cancel(); }
         syncAnimation();
     });
     function finishDrag(event) {
         if (!drag || (event && event.pointerId !== drag.pointerId)) return;
         const { pointerId } = drag;
+        const release = event?.type === 'pointerup';
+        if (release && drag.started && event.timeStamp - drag.time < 110) motion.release(drag.vx, drag.vy);
+        else if (release) motion.release(0, 0);
+        else motion.cancel();
         drag = null;
-        canvas.classList.remove('is-dragging');
-        if (canvas.hasPointerCapture(pointerId)) canvas.releasePointerCapture(pointerId);
+        interaction.classList.remove('is-dragging');
+        if (interaction.hasPointerCapture(pointerId)) interaction.releasePointerCapture(pointerId);
     }
-    function rotateBy(x, y) {
-        // Reserve room for the automatic sway, including while dragging at a limit.
-        rotationCenter.y = THREE.MathUtils.clamp(rotationCenter.y + x, -rotationLimits.y + sway.y, rotationLimits.y - sway.y);
-        rotationCenter.x = THREE.MathUtils.clamp(rotationCenter.x + y, -rotationLimits.x + sway.x, rotationLimits.x - sway.x);
-        render();
-    }
-    canvas.addEventListener('pointerdown', (event) => {
-        if (!event.isPrimary || event.button !== 0 || drag || contextLost) return;
-        drag = { pointerId: event.pointerId, type: event.pointerType, startX: event.clientX, startY: event.clientY, x: event.clientX, y: event.clientY, started: false };
-        canvas.setPointerCapture(event.pointerId);
+    interaction.addEventListener('pointerdown', (event) => {
+        if (!event.isPrimary || event.button !== 0 || drag || contextLost || failed || !revealed) return;
+        motion.begin();
+        drag = { pointerId: event.pointerId, type: event.pointerType, startX: event.clientX, startY: event.clientY, x: event.clientX, y: event.clientY, time: event.timeStamp, vx: 0, vy: 0, started: false };
+        interaction.setPointerCapture(event.pointerId);
+        interaction.classList.add('is-dragging');
     });
-    canvas.addEventListener('pointermove', (event) => {
+    interaction.addEventListener('pointermove', (event) => {
         if (!drag || event.pointerId !== drag.pointerId) return;
         if (drag.type === 'mouse' && !(event.buttons & 1)) { finishDrag(event); return; }
         if (!drag.started) {
-            const x = event.clientX - drag.startX, y = event.clientY - drag.startY;
-            if (Math.hypot(x, y) < 6) return;
-            // Vertical touch gestures belong to page scrolling, including native pinch zoom.
-            if (drag.type === 'touch' && Math.abs(y) >= Math.abs(x)) { finishDrag(event); return; }
+            if (Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < 4) return;
             drag.started = true;
-            canvas.classList.add('is-dragging');
         }
-        const scale = Math.PI / Math.max(canvas.getBoundingClientRect().width, 1);
-        rotateBy((event.clientX - drag.x) * scale, drag.type === 'touch' ? 0 : (event.clientY - drag.y) * scale);
+        const scale = 1.35 / Math.max(canvas.getBoundingClientRect().width, 1);
+        const dx = (event.clientX - drag.x) * scale, dy = (event.clientY - drag.y) * scale * 0.65;
+        motion.move(dy, dx);
+        const delta = Math.max((event.timeStamp - drag.time) / 1000, 1 / 240);
+        for (const [movement, speedKey] of [[dy, 'vx'], [dx, 'vy']]) {
+            const speed = THREE.MathUtils.clamp(movement / delta, -2.4, 2.4);
+            if (delta > 0.12 || drag[speedKey] * speed < 0) drag[speedKey] = speed;
+            else drag[speedKey] = THREE.MathUtils.damp(drag[speedKey], speed, 35, delta);
+        }
         drag.x = event.clientX;
         drag.y = event.clientY;
+        drag.time = event.timeStamp;
     }, { passive: true });
-    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((event) => canvas.addEventListener(event, finishDrag));
-    window.addEventListener('blur', () => finishDrag());
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((event) => interaction.addEventListener(event, finishDrag));
+    interaction.addEventListener('contextmenu', (event) => event.preventDefault());
+    window.addEventListener('blur', () => { finishDrag(); motion.cancel(); });
     canvas.addEventListener('keydown', (event) => {
-        if (contextLost || event.altKey || event.ctrlKey || event.metaKey) return;
+        if (contextLost || failed || event.altKey || event.ctrlKey || event.metaKey) return;
         const step = Math.PI / 18;
         const directions = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
         if (!directions[event.key] && event.key !== 'Home') return;
         event.preventDefault();
         finishDrag();
-        if (event.key === 'Home') {
-            Object.assign(rotationCenter, homeRotation);
-            render();
-        } else rotateBy(...directions[event.key]);
+        if (event.key === 'Home') motion.reset();
+        else {
+            const [yaw, pitch] = directions[event.key];
+            motion.nudge(pitch, yaw);
+        }
     });
-    reducedMotion.addEventListener('change', syncAnimation);
+    reducedMotion.addEventListener('change', () => motion.setReduced(reducedMotion.matches));
     const syncTheme = () => {
         const light = document.documentElement.dataset.theme === 'light';
         material.color.set(light ? 0x258daf : 0x41aacf);
@@ -189,29 +210,25 @@ function createSculpture() {
     canvas.addEventListener('webglcontextlost', (event) => {
         event.preventDefault();
         contextLost = true;
+        revealed = false;
         finishDrag();
+        motion.cancel();
+        cancelAnimationFrame(revealFrame);
+        revealFrame = 0;
+        setState('loading');
         syncAnimation();
-        host.classList.remove('ready');
-        canvas.tabIndex = -1;
     });
     canvas.addEventListener('webglcontextrestored', () => {
-        contextLost = false;
-        environment.dispose();
-        environment = createEnvironment();
-        scene.environment = environment.texture;
-        resize();
-        host.classList.add('ready');
-        canvas.tabIndex = 0;
-        syncAnimation();
+        try {
+            contextLost = false;
+            environment.dispose();
+            environment = createEnvironment();
+            scene.environment = environment.texture;
+            resize();
+            syncAnimation();
+        } catch (error) { failScene(error); }
     });
     resize();
     syncTheme();
-    host.classList.add('ready');
-    canvas.tabIndex = 0;
     syncAnimation();
-}
-try { createSculpture(); } catch (error) {
-    // The original logo keeps the page complete on devices without WebGL.
-    host.classList.remove('ready');
-    console.warn('3D visual unavailable; static view retained.', error);
 }

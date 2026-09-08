@@ -66,18 +66,29 @@ h1 > span { color: var(--hero-gray); background: linear-gradient(115deg, var(--h
 .hero-footnote { display: flex; align-items: center; gap: 10px; margin-top: 45px; color: var(--subtle); font-size: 12px; letter-spacing: 1px; }
 .tiny-cross { font-size: 21px; font-weight: 300; }
 .hero-visual { height: 620px; position: relative; margin-left: -40px; }
-#sculpture { display: block; width: 100%; height: 100%; position: relative; z-index: 1; opacity: 0; transition: opacity 1s; pointer-events: none; }
-.hero-visual.ready #sculpture { opacity: 1; pointer-events: auto; cursor: grab; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; }
-.hero-visual.ready #sculpture.is-dragging { cursor: grabbing; }
+#sculpture { display: block; width: 100%; height: 100%; position: relative; z-index: 1; opacity: 0; transform: scale(.975); transition: opacity .7s var(--ease), transform 1s var(--ease); pointer-events: none; }
+.hero-visual.ready #sculpture { opacity: 1; transform: scale(1); }
+.scene-interaction { position: absolute; inset: 17% 4% 18%; z-index: 3; pointer-events: none; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.hero-visual.ready .scene-interaction { pointer-events: auto; cursor: grab; }
+.hero-visual.ready .scene-interaction.is-dragging { cursor: grabbing; }
 .scene-topline, .scene-label, .rotation-hint { pointer-events: none; }
 .rotation-hint { visibility: hidden; letter-spacing: .5px; }
 .hero-visual.ready .rotation-hint { visibility: visible; }
 .drag-touch { display: none; }
 @media (hover: none), (pointer: coarse) { .drag-desktop { display: none; } .drag-touch { display: inline; } }
 .scene-halo { position: absolute; inset: 5%; background: radial-gradient(ellipse, var(--halo), transparent 68%); border-radius: 50%; }
-.scene-fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--hero-gray); font-size: 270px; font-family: Georgia, serif; opacity: 1; }
+.scene-fallback { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; visibility: hidden; transition: opacity .5s; pointer-events: none; }
 .scene-fallback img { width: 56%; max-width: 350px; height: auto; border-radius: 22%; }
-.hero-visual.ready .scene-fallback { visibility: hidden; }
+[data-scene-state="unavailable"] .scene-fallback { opacity: 1; visibility: visible; }
+.scene-loader { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; pointer-events: none; opacity: 1; visibility: visible; transition: opacity .4s, visibility .4s; }
+.hero-visual:not([data-scene-state="loading"]) .scene-loader { opacity: 0; visibility: hidden; }
+.loader-orbit { position: relative; width: 64px; height: 64px; border: 1px solid var(--border); border-radius: 50%; background: radial-gradient(circle, var(--halo), transparent 68%); }
+.loader-orbit::before { content: ''; position: absolute; inset: -1px; border: 1px solid transparent; border-top-color: var(--accent); border-radius: 50%; animation: loader-orbit 1.8s linear infinite; }
+.loader-orbit::after { content: ''; position: absolute; inset: 12px; border: 1px solid var(--border); border-radius: 50%; }
+.loader-orbit > span { position: absolute; inset: 26px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 18px var(--halo); animation: loader-breathe 1.8s ease-in-out infinite; }
+.loader-caption { color: var(--subtle); font-size: 11px; letter-spacing: 3px; }
+@keyframes loader-orbit { to { transform: rotate(360deg); } }
+@keyframes loader-breathe { 50% { opacity: .45; transform: scale(.7); } }
 .scene-topline, .scene-bottomline { position: absolute; left: 10%; right: 2%; display: flex; align-items: center; justify-content: space-between; z-index: 2; font-size: 12px; letter-spacing: 1.4px; color: var(--subtle); }
 .scene-topline { top: 35px; } .scene-topline > svg { width: 24px; height: 24px; color: var(--muted); }
 .scene-bottomline { bottom: 55px; pointer-events: none; }
@@ -207,7 +218,7 @@ h3 { margin-top: 21px; font-size: clamp(25px, 2.4vw, 34px); font-weight: 600; le
     .nav-links { gap: 18px; margin: 0 0 0 auto; font-size: 13px; } .nav-links a > span { display: none; } .nav-cta { display: none; } .nav-tools { gap: 0; } .nav-inner { gap: 12px; } .icon-button { width: 32px; height: 40px; }
     .hero { padding-top: 48px; display: flex; flex-direction: column; align-items: stretch; min-height: auto; } .hero-copy { padding: 0; } .hero-copy .eyebrow { font-size: 9px; letter-spacing: 1px; }
     h1 { font-size: clamp(53px, 11vw, 76px); margin-top: 24px; letter-spacing: -2px; } .hero-description { font-size: 16px; margin-top: 24px; } .hero-actions { margin-top: 26px; gap: 28px; } .button-primary { font-size: 14px; padding: 14px 21px; }
-    .hero-footnote { display: none; } .hero-visual { height: 430px; margin: 4px -15px 0; } .scene-topline { top: 23px; left: 9%; right: 6%; font-size: 9px; } .scene-bottomline { bottom: 17px; left: 9%; right: 6%; font-size: 10px; } .scene-label { right: 4%; top: 66%; font-size: 9px; } .scene-fallback { font-size: 210px; }
+    .hero-footnote { display: none; } .hero-visual { height: 430px; margin: 4px -15px 0; } .scene-topline { top: 23px; left: 9%; right: 6%; font-size: 9px; } .scene-bottomline { bottom: 17px; left: 9%; right: 6%; font-size: 10px; } .scene-label { right: 4%; top: 66%; font-size: 9px; }
     .hero-bottom { width: 100%; padding: 20px 0; font-size: 10px; } .hero-bottom a { gap: 10px; } .hero-bottom p { gap: 7px; }
     .section { padding-top: 72px; } .section-heading { align-items: start; flex-direction: column; gap: 17px; margin-bottom: 28px; } .eyebrow { font-size: 10px; letter-spacing: 1.3px; } h2 { font-size: 32px; letter-spacing: -1px; } .section-heading h2 { margin-top: 13px; } .section-heading > p { font-size: 14px; }
 
