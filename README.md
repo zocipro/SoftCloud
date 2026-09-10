@@ -23,10 +23,10 @@ python3 -m http.server 4173
 - 系统减少动态效果设置会降低自主运动幅度，手动拖拽仍保持连续阻尼与惯性，不再直接跳转角度；页面不可见时停止渲染。
 - 星芒和外链箭头使用 SVG，避免手机将文字图标渲染成彩色 Emoji。
 - WebGL 不可用时保留静态排版与所有产品入口。
-- 项目区直接说明用途，并用标注为示意的界面展示影视观看、SBTI 结果和 AI 待办整理流程。
+- 项目区直接说明用途，并用标注为示意的界面展示单词练习、SBTI 结果和声音混音流程。
 - 适配手机、键盘导航及滚动入场。
 
-现有产品入口：SoftCloud TV (`tv.zoci.pro`)、SBTI 人格测试 (`sbti.zoci.pro`)、AI Todo (`aitodo.zoci.pro`)。
+现有产品入口：软云单词 (`words.zoci.pro`)、SBTI 人格测试 (`sbti.zoci.pro`)、软云专注 (`focus.zoci.pro`)。
 
 ## 文件与部署
 
