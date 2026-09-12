@@ -133,23 +133,23 @@ h3 { margin-top: 21px; font-size: clamp(25px, 2.4vw, 34px); font-weight: 600; le
 .demo-player-track { height: 3px; flex: 1; background: #7e9eb5; border-radius: 4px; }
 .demo-player-track i { display: block; width: 28%; height: 100%; background: #fff; }
 
-.personality-input { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#526c80; font-size:11px; }
-.personality-input > div { display:flex; gap:7px; }
-.personality-input i { width:17px; height:17px; border:1px solid #9bb8c9; border-radius:50%; background:#fff; }
-.personality-input i.selected { border:5px solid #197baa; }
-.personality-connector { display:flex; justify-content:center; padding:9px 0; color:#83afc5; font-size:20px; }
-.personality-profile { position:relative; text-align:center; padding:20px 17px 17px; border:1px solid #d8e5ef; border-radius:12px; background:#fff; }
-.personality-mark { display:grid; grid-template-columns:repeat(2,13px); gap:3px; width:max-content; margin:0 auto 12px; transform:rotate(-8deg); }
-.personality-mark i { width:13px; height:13px; border-radius:5px; background:#197baa; }
-.personality-mark i:nth-child(2),.personality-mark i:nth-child(3) { background:#afd6e7; }
-.personality-profile small { display:block; color:#526c80; font-size:10px; }
-.personality-profile > strong { display:block; margin:7px 0 9px; color:#25465d; font-size:23px; font-weight:600; letter-spacing:-.7px; }
-.personality-caption { font-size:11px; color:#526c80; }
-.personality-dimensions { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; border-top:1px solid #dbe8f0; margin-top:20px; padding-top:15px; }
-.personality-dimensions > div { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; }
-.personality-dimensions span { grid-column:1 / -1; font-size:10px; color:#526c80; margin-bottom:6px; }
-.personality-dimensions i { height:6px; border-radius:3px; background:#afd6e7; }
-.personality-dimensions i:nth-of-type(2) { background:#197baa; }
+.concept-input { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#526c80; font-size:11px; }
+.concept-input > div { display:flex; gap:7px; }
+.concept-input i { width:17px; height:17px; border:1px solid #9bb8c9; border-radius:50%; background:#fff; }
+.concept-input i.selected { border:5px solid #197baa; }
+.concept-connector { display:flex; justify-content:center; padding:9px 0; color:#83afc5; font-size:20px; }
+.concept-profile { position:relative; text-align:center; padding:20px 17px 17px; border:1px solid #d8e5ef; border-radius:12px; background:#fff; }
+.concept-mark { display:grid; grid-template-columns:repeat(2,13px); gap:3px; width:max-content; margin:0 auto 12px; transform:rotate(-8deg); }
+.concept-mark i { width:13px; height:13px; border-radius:5px; background:#197baa; }
+.concept-mark i:nth-child(2),.concept-mark i:nth-child(3) { background:#afd6e7; }
+.concept-profile small { display:block; color:#526c80; font-size:10px; }
+.concept-profile > strong { display:block; margin:7px 0 9px; color:#25465d; font-size:23px; font-weight:600; letter-spacing:-.7px; }
+.concept-caption { font-size:11px; color:#526c80; }
+.concept-dimensions { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; border-top:1px solid #dbe8f0; margin-top:20px; padding-top:15px; }
+.concept-dimensions > div { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; }
+.concept-dimensions span { grid-column:1 / -1; font-size:10px; color:#526c80; margin-bottom:6px; }
+.concept-dimensions i { height:6px; border-radius:3px; background:#afd6e7; }
+.concept-dimensions i:nth-of-type(2) { background:#197baa; }
 .demo-note { margin-top: 15px; font-size: 12px; color: #526c80; line-height: 1.7; }
 .todo-demo { background: #eef8fc; }
 .demo-step-label { margin-bottom: 10px; color: #526c80; font-size: 12px; }
@@ -226,3 +226,18 @@ h3 { margin-top: 21px; font-size: clamp(25px, 2.4vw, 34px); font-weight: 600; le
 
 /* Product demonstrations: static, clearly labelled examples. */
 .word-preview{text-align:center;padding:32px 12px}.word-preview small{color:var(--muted);font-size:11px}.word-preview strong{display:block;margin:14px 0;font:500 clamp(30px,3vw,44px)/1.2 monospace;letter-spacing:-1px;color:#9bb8c9}.word-preview strong span:first-child{color:var(--accent)}.word-preview p{font-size:12px;color:var(--muted)}.typing-caret{display:inline-block;height:34px;vertical-align:middle;border-left:2px solid var(--accent)}.word-metrics{display:flex;justify-content:space-between;padding:15px 0;border-top:1px solid var(--border);font-size:10px;color:var(--muted)}.sound-preview{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);font-size:12px}.sound-preview>span{width:64px}.sound-preview i{height:5px;background:var(--border);border-radius:6px;flex:1;overflow:hidden}.sound-preview i:before{content:"";display:block;background:var(--accent);width:var(--level);height:100%}.sound-preview em{font-style:normal;font-size:10px;color:var(--muted);width:30px}.focus-timer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;color:var(--muted);font-size:11px}.focus-timer strong{font-size:30px;font-weight:500;letter-spacing:-1px;color:var(--text)}
+
+/* One illustration system, with a distinct symbol for each product. */
+.concept-input > div { flex-shrink:0; }
+.concept-input .keyboard-input i { border-radius:4px; }
+.concept-input .wave-input { height:17px; align-items:center; }
+.concept-input .wave-input i { width:5px; height:11px; border:0; background:#afd6e7; border-radius:4px; }
+.concept-input .wave-input i.selected { height:17px; background:#197baa; }
+.concept-mark { height:29px; transform:none; }
+.keyboard-mark i { border-radius:3px; box-shadow:0 2px 0 #d8e5ef; }
+.wave-mark { display:flex; align-items:center; gap:4px; }
+.wave-mark i { width:5px; height:15px; border-radius:4px; }
+.wave-mark i:nth-child(2),.wave-mark i:nth-child(4) { height:23px; }
+.wave-mark i:nth-child(3) { height:29px; background:#197baa; }
+.concept-three { grid-template-columns:repeat(3,1fr); }
+@media (max-width:600px) { .concept-input { font-size:10px; gap:6px; } .concept-profile > strong { font-size:21px; } .concept-dimensions { gap:8px; } }
