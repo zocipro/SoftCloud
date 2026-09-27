@@ -28,6 +28,8 @@ python3 -m http.server 4173
 
 现有产品入口：软云单词 (`words.zoci.pro`)、SBTI 人格测试 (`sbti.zoci.pro`)、软云专注 (`focus.zoci.pro`)。
 
+官网另设「常用工具」区，提供赫兹导航的 9 个外部工具入口，均在新窗口打开原网站；不计入自有产品数量。入口配置位于 `index.html` 的 `#tools` 区块。
+
 ## 文件与部署
 
 `index.html` 为内容，`styles.css` 为双主题与响应式样式，`script.js` 为页面交互与场景加载入口，`scene.js` 为 3D 场景，`assets/logo-motion.js` 为独立的自主运动与手势物理。
