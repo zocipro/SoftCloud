@@ -1,0 +1,25 @@
+:root{--brand:#167eaa;--brand-deep:#12688d;--brand-soft:#e8f5fc;--brand-softer:#f7fbfe;--ink:#18394c;--ink-2:#506e81;--ink-3:#7893a6;--ink-4:#a8c1cf;--line:#dbe9f1;--line-strong:#c1dbe9;--bg:#f7fbfe;--surface:#fff;--surface-soft:#f2f8fc;--radius-lg:22px;--header-height:78px}.sc-editor-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:#18394c;font-size:26px;font-weight:650;letter-spacing:-1.2px}.sc-editor-brand img{width:34px;height:34px;border-radius:10px}.tb-name{border-left:1px solid var(--line);padding-left:16px;color:var(--ink-2);font-size:14px}.topbar{background:#f7fbfe!important;border-bottom:1px solid var(--line)!important}.tb-social a{font-size:12px;text-decoration:none;color:var(--brand)}.tb-tag{display:none}.pcopy{background:var(--brand)!important}.tb-logo{background:var(--brand)}@media(max-width:640px){.sc-editor-brand{font-size:22px}.sc-editor-brand img{width:29px;height:29px}.tb-name{font-size:12px;padding-left:10px}.tb-save{display:none}}
+
+.tb-social a:first-child{width:auto;white-space:nowrap;padding-inline:8px}.editor-body,.editor-body .cm-editor,.editor-body .cm-scroller,.statusbar{background:var(--bg)!important}
+:root{--panel:#fff;--panel-2:#f2f8fc;--line-2:#e8f1f7;--dark:#18394c}
+.topbar .tb-social a:first-child{width:auto!important;white-space:nowrap;padding-inline:8px}
+.editor-body .cm-gutters{background:var(--bg)!important}
+.preview-pane,.preview-pane.is-preview-only,.preview-pane.is-preview-only.dev-full{background-image:radial-gradient(circle,#dbe9f1 1px,transparent 1px)}
+@media(max-width:700px){
+  .app-d,.d-body{max-width:100vw;overflow:hidden}
+  .topbar{gap:8px;padding-inline:10px}
+  .topbar .tb-social a{font-size:11px}
+  .topbar .sc-editor-brand{font-size:21px}
+  .canvas{flex-direction:column;overflow-y:auto;overflow-x:hidden}
+  .canvas .editor-pane{flex:0 0 52dvh!important;width:100%;min-width:0}
+  .canvas .editor-pane.pane-hidden{display:none}
+  .canvas .divider{display:none}
+  .canvas .preview-pane{flex:0 0 78dvh;width:100%;min-width:0}
+  .canvas.mode-preview .preview-pane{flex:1}
+  .pbar{height:auto;min-height:76px;flex-wrap:wrap;padding:6px 8px;gap:6px}
+  .pbar .spacer{display:none}
+  .pbar .pcopy{font-size:11px;width:auto;padding:0 9px;gap:4px}
+  .statusbar{font-size:10px;gap:6px;padding-inline:8px}
+  .statusbar .spacer+span{display:none}
+  .preview-pane .preview-scroll{padding-inline:8px}
+}

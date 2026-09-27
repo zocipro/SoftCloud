@@ -28,14 +28,30 @@ python3 -m http.server 4173
 
 现有产品入口：软云单词 (`words.zoci.pro`)、SBTI 人格测试 (`sbti.zoci.pro`)、软云专注 (`focus.zoci.pro`)。
 
-官网另设「常用工具」区，提供赫兹导航的 9 个外部工具入口，均在新窗口打开原网站；不计入自有产品数量。入口配置位于 `index.html` 的 `#tools` 区块。
+官网「常用工具」区提供 9 个同域工具，入口配置在 `index.html` 的 `#tools`，页面与依赖均随本站部署。
+
+| 路径 | 功能 |
+| --- | --- |
+| `/tools/bm/` | URL、Base64、MD5、图片 Base64 |
+| `/tools/sp/` | 图片上传、取色、海报文字编辑、PNG 导出 |
+| `/tools/png/` | 本地批量图片压缩、缩放、格式转换、ZIP 下载 |
+| `/tools/wzry-name/` | 重复昵称与空白名候选；以游戏实际校验为准 |
+| `/tools/mars-editor/` | 软云排版，基于 md-wechat 的 Markdown/公众号编辑器 |
+| `/tools/gpt-image-2/` | 36 个图像提示词案例，搜索、收藏、复制与导出 |
+| `/tools/aggregate-parser/` | 本地二维码识别、HTTP(S) 链接提取、URL 解码 |
+| `/tools/life-list/` | 60 项人生目标、自定义目标、进度与图片/JSON 导出 |
+| `/tools/xhs/` | 自定义文字引导图，PNG、GIF 与图片复制 |
+
+工具使用蓝白 SoftCloud 样式。清单与收藏保存在当前浏览器，换设备前应导出备份。图片处理不会上传文件；当前没有云端图床、卡密或平台 DP 转换服务。图像提示词库不调用生成模型。
+
+排版编辑器的上游源代码、固定依赖与集成说明保存在 `apps/md-wechat/`，构建结果已放入 `tools/mars-editor/`，静态部署不需要临时安装依赖。编辑器默认在本地保存文档，手动配置第三方图床时遵循其配置。许可证见 `/tools/credits.html`。工具逻辑检查：`node --test tests/tools.test.mjs`。
 
 ## 文件与部署
 
 `index.html` 为内容，`styles.css` 为双主题与响应式样式，`script.js` 为页面交互与场景加载入口，`scene.js` 为 3D 场景，`assets/logo-motion.js` 为独立的自主运动与手势物理。
 
-部署时上传这四个文件、`ruanyun.png`、`assets/` 与 `vendor/`，保持目录结构即可；无需服务器端程序或构建步骤。`.openai/hosting.json` 仅用于独立的 Sites 预览，不影响原有静态托管。
+部署时上传根目录页面、脚本与样式、`ruanyun.png`、`assets/`、`vendor/` 与完整的 `tools/` 目录，保持目录结构即可；无需服务器端程序或构建步骤。`.openai/hosting.json` 仅用于独立的 Sites 预览，不影响原有静态托管。
 
-Three.js 0.180.0 随项目本地提供，许可证见 `vendor/THREE-LICENSE.txt`。产品界面使用 HTML/CSS 功能示意，不是真实截图或用户数据。
+Three.js 0.180.0 随项目本地提供，许可证见 `vendor/THREE-LICENSE.txt`。产品展示使用 SVG 功能示意，不是真实截图或用户数据。
 
 运动行为回归可在安装 Node.js 后运行 `node --test tests/logo-motion.test.mjs`，覆盖自主活动、快速释放后的惯性、软限位、重抓连续性与不同刷新率。
