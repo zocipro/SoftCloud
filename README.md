@@ -23,10 +23,10 @@ python3 -m http.server 4173
 - 系统减少动态效果设置会降低自主运动幅度，手动拖拽仍保持连续阻尼与惯性，不再直接跳转角度；页面不可见时停止渲染。
 - 星芒和外链箭头使用 SVG，避免手机将文字图标渲染成彩色 Emoji。
 - WebGL 不可用时保留静态排版与所有产品入口。
-- 项目区直接说明用途，并用标注为示意的界面展示单词练习、SBTI 结果和声音混音流程。
+- 项目区直接说明用途，并用标注为示意的界面展示单词练习、SBTI 结果、声音混音与 AI 热点阅读流程。
 - 适配手机、键盘导航及滚动入场。
 
-现有产品入口：软云单词 (`words.zoci.pro`)、SBTI 人格测试 (`sbti.zoci.pro`)、软云专注 (`focus.zoci.pro`)。
+现有产品入口：软云单词 (`words.zoci.pro`)、SBTI 人格测试 (`sbti.zoci.pro`)、软云专注 (`focus.zoci.pro`)、软云 AI 热点 (`zoci.pro/tools/ai-hot/`)。
 
 官网「常用工具」区提供 9 个同域工具，入口配置在 `index.html` 的 `#tools`，页面与依赖均随本站部署。
 
@@ -46,11 +46,13 @@ python3 -m http.server 4173
 
 排版编辑器的上游源代码、固定依赖与集成说明保存在 `apps/md-wechat/`，构建结果已放入 `tools/mars-editor/`，静态部署不需要临时安装依赖。编辑器默认在本地保存文档，手动配置第三方图床时遵循其配置。许可证见 `/tools/credits.html`。工具逻辑检查：`node --test tests/tools.test.mjs`。
 
+AI 热点采用本站蓝白与深色样式，提供精选、热点、中文摘要、早报、搜索、RSS 和本地收藏。页面位于 `tools/ai-hot/`，数据接口是同域 `/api/ai-hot`；定时收录与模型调用仅在 Cloudflare 的后台运行，阅读不会触发模型调用。它与上面的本地工具不同，需要联网读取内容。
+
 ## 文件与部署
 
 `index.html` 为内容，`styles.css` 为双主题与响应式样式，`script.js` 为页面交互与场景加载入口，`scene.js` 为 3D 场景，`assets/logo-motion.js` 为独立的自主运动与手势物理。
 
-部署时上传根目录页面、脚本与样式、`ruanyun.png`、`assets/`、`vendor/` 与完整的 `tools/` 目录，保持目录结构即可；无需服务器端程序或构建步骤。`.openai/hosting.json` 仅用于独立的 Sites 预览，不影响原有静态托管。
+部署时上传根目录页面、脚本与样式、`ruanyun.png`、`assets/`、`vendor/` 与完整的 `tools/` 目录，保持目录结构即可；静态页面无需构建步骤。AI 热点的数据处理服务需要单独部署到 Cloudflare Workers，步骤见 `apps/ai-hot/README.md`。`.openai/hosting.json` 仅用于独立的 Sites 预览，不影响原有静态托管。
 
 Three.js 0.180.0 随项目本地提供，许可证见 `vendor/THREE-LICENSE.txt`。产品展示使用 SVG 功能示意，不是真实截图或用户数据。
 

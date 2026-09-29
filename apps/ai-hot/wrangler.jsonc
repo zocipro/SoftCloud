@@ -1,0 +1,67 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "softcloud-ai-hot",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-30",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "softcloud-ai-hot",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "queues": {
+    "producers": [
+      {
+        "binding": "JOBS",
+        "queue": "softcloud-ai-hot-jobs"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "softcloud-ai-hot-jobs",
+        "max_batch_size": 1,
+        "max_concurrency": 1,
+        "max_retries": 3
+      }
+    ]
+  },
+  "triggers": {
+    "crons": [
+      "*/10 * * * *",
+      "0 0 * * *"
+    ]
+  },
+  "vars": {
+    "SITE_URL": "https://zoci.pro/tools/ai-hot/",
+    "COLLECT_ENABLED": "false",
+    "MODEL_CALLS_ENABLED": "false",
+    "FREE_PLAN_VERIFIED": "false",
+    "DAILY_NEURON_BUDGET": "6000",
+    "DAILY_ARTICLE_LIMIT": "24"
+  },
+  "rules": [
+    {
+      "type": "Text",
+      "globs": [
+        "**/*.md"
+      ],
+      "fallthrough": true
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "zoci.pro/api/ai-hot*",
+      "zone_name": "zoci.pro"
+    }
+  ]
+}

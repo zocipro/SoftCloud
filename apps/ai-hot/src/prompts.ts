@@ -1,0 +1,32 @@
+import p0 from '../upstream/prompts/content-understanding.md';
+import p1 from '../upstream/prompts/group-batch.md';
+import p2 from '../upstream/prompts/group-definitions.md';
+import p3 from '../upstream/prompts/group-method.md';
+import p4 from '../upstream/prompts/group-pair.md';
+import p5 from '../upstream/prompts/group-signal.md';
+import p6 from '../upstream/prompts/identity-context.md';
+import p7 from '../upstream/prompts/prefilter.md';
+import p8 from '../upstream/prompts/report-daily-lead.md';
+import p9 from '../upstream/prompts/report-period.md';
+import p10 from '../upstream/prompts/rules-answer-first-summary.md';
+import p11 from '../upstream/prompts/rules-anti-hallucination.md';
+import p12 from '../upstream/prompts/rules-domain.md';
+import p13 from '../upstream/prompts/rules-self-contained-title.md';
+import p14 from '../upstream/prompts/safety.md';
+import p15 from '../upstream/prompts/selection-score.md';
+import p16 from '../upstream/prompts/story-digest.md';
+import p17 from '../upstream/prompts/structure.md';
+import p18 from '../upstream/prompts/summarize-article-empty.md';
+import p19 from '../upstream/prompts/summarize-article.md';
+import p20 from '../upstream/prompts/summarize-long-post-quoted.md';
+import p21 from '../upstream/prompts/summarize-long-post.md';
+import p22 from '../upstream/prompts/summarize-short-post-quoted.md';
+import p23 from '../upstream/prompts/summarize-short-post.md';
+import p24 from '../upstream/prompts/translate-body.md';
+import p25 from '../upstream/prompts/translate-post.md';
+import p26 from '../upstream/prompts/understand.md';
+const prompts: Record<string, string> = {'content-understanding': p0, 'group-batch': p1, 'group-definitions': p2, 'group-method': p3, 'group-pair': p4, 'group-signal': p5, 'identity-context': p6, 'prefilter': p7, 'report-daily-lead': p8, 'report-period': p9, 'rules-answer-first-summary': p10, 'rules-anti-hallucination': p11, 'rules-domain': p12, 'rules-self-contained-title': p13, 'safety': p14, 'selection-score': p15, 'story-digest': p16, 'structure': p17, 'summarize-article-empty': p18, 'summarize-article': p19, 'summarize-long-post-quoted': p20, 'summarize-long-post': p21, 'summarize-short-post-quoted': p22, 'summarize-short-post': p23, 'translate-body': p24, 'translate-post': p25, 'understand': p26};
+export function promptText(name: string, seen: string[] = []): string {
+  if (seen.includes(name) || !prompts[name]) throw Error('提示词引用无效: ' + name);
+  return prompts[name].replace(/\{\{>\s*([\w-]+)\s*\}\}/g, (_, key) => promptText(key, [...seen, name])).replaceAll('{{siteName}}', '软云 AI 热点');
+}
