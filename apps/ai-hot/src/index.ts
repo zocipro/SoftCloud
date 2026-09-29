@@ -252,9 +252,16 @@ export default {
       if (url.pathname !== PREFIX && !url.pathname.startsWith(PREFIX + '/')) return json({error:'接口不存在'},404);
       const isPublic = ['GET','HEAD'].includes(request.method) && !url.pathname.includes('/admin');
       const key = new Request(request.url,{method:'GET'});
-      if (isPublic) { const cached = await caches.default.match(key); if (cached) return cached; }
+      if (isPublic) { const cached = await caches.default.match(key); if (cached) {
+        const headers = new Headers(cached.headers); headers.set('Cache-Control','no-store');
+        return new Response(request.method === 'HEAD' ? null : cached.body,{status:cached.status,headers});
+      } }
       const response = await route(request,env);
-      if (isPublic && response.ok) { response.headers.set('Cache-Control','public,max-age=60'); ctx.waitUntil(caches.default.put(key,response.clone())); }
+      if (isPublic && response.ok) {
+        const cached = response.clone(); cached.headers.set('Cache-Control','public,max-age=60');
+        ctx.waitUntil(caches.default.put(key,cached));
+        response.headers.set('Cache-Control','no-store');
+      }
       return request.method === 'HEAD' ? new Response(null,{status:response.status,headers:response.headers}) : response;
     } catch (error) { console.error(JSON.stringify({kind:'api',error:String(error)})); return json({error:'数据暂时不可用，请稍后重试'},503); }
   },

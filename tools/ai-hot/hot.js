@@ -17,7 +17,7 @@ const mock = [
   {id:'example-3',title_zh:'示例：一篇研究，解释模型能力变化的原因',summary_zh:'摘要只依据当前资料，不补写未经原文支持的效果、因果或性能结论。研究内容也可以在分类中独立阅读。',source_name:'示例研究信源',source_id:'example-source-c',published:Date.now()-10800000,category:'paper',score1:80,score2:80,selected:1,reason:'介绍一项具体发现，帮助读者理解能力边界与实际影响。',tags:'["论文/研究","推理"]',url:'https://github.com/KKKKhazix/AIHOT'}
 ];
 async function api(path) {
-  const response=await fetch(API+path,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(15000)});
+  const response=await fetch(API+path,{headers:{Accept:'application/json'},cache:'no-store',signal:AbortSignal.timeout(15000)});
   if(!response.ok)throw Error('数据服务暂时不可用');
   if(!response.headers.get('content-type')?.includes('application/json'))throw Error('数据服务尚未接通');
   return response.json();
