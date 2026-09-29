@@ -43,9 +43,6 @@
   },
   "vars": {
     "SITE_URL": "https://zoci.pro/tools/ai-hot/",
-    "COLLECT_ENABLED": "false",
-    "MODEL_CALLS_ENABLED": "false",
-    "FREE_PLAN_VERIFIED": "false",
     "DAILY_NEURON_BUDGET": "6000",
     "DAILY_ARTICLE_LIMIT": "24"
   },

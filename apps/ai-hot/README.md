@@ -36,7 +36,7 @@ pnpm run dev
 
 ## Cloudflare Git 构建
 
-使用现有 GitHub 连接 `zocipro/SoftCloud`，项目 `softcloud-ai-hot`，根目录 `apps/ai-hot`，生产分支 `main`。部署命令 `pnpm run deploy`，无需额外构建命令。Wrangler 自动创建 D1 `softcloud-ai-hot` 和 Queue `softcloud-ai-hot-jobs`，配置 AI 绑定与路由 `zoci.pro/api/ai-hot*`，随后脚本应用 D1 增量迁移。部署保留控制台中的开关变量；不要使用 `pnpm deploy`，它是 pnpm 自带的另一条命令。
+使用现有 GitHub 连接 `zocipro/SoftCloud`，项目 `softcloud-ai-hot`，根目录 `apps/ai-hot`，生产分支 `main`。部署命令 `pnpm run deploy`，无需额外构建命令。Wrangler 自动创建 D1 `softcloud-ai-hot` 和 Queue `softcloud-ai-hot-jobs`，配置 AI 绑定与路由 `zoci.pro/api/ai-hot*`，随后脚本应用 D1 增量迁移。开关变量不写入部署配置，缺失即关闭；`--keep-vars` 保留控制台已设置的开关，避免明确的配置值覆盖线上状态。不要使用 `pnpm deploy`，它是 pnpm 自带的另一条命令。
 
 官网继续原有静态 Pages 发布。若自动配置未写回资源 ID，可在控制台核实绑定；后续发布应复用同名资源。
 
