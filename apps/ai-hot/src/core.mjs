@@ -5,7 +5,7 @@ export function safeUrl(value) {
   try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password ? u.href : null; } catch { return null; }
 }
 export function cleanText(value, limit = 6000) {
-  return String(value ?? '').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '').replace(/<[^>]*>/g, ' ').replace(/&(?:amp|lt|gt|quot|apos|nbsp);/g, s => ({'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&apos;':"'",'&nbsp;':' '}[s])).replace(/\s+/g, ' ').trim().slice(0, limit);
+  return String(value ?? '').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '').replace(/<[^>]*>/g, ' ').replace(/&#(x[0-9a-f]+|[0-9]+);/gi, (original, code) => { const point = code[0].toLowerCase() === 'x' ? parseInt(code.slice(1),16) : Number(code); return point > 0 && point <= 0x10ffff && !(point >= 0xd800 && point <= 0xdfff) ? String.fromCodePoint(point) : original; }).replace(/&(?:amp|lt|gt|quot|apos|nbsp);/g, s => ({'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&apos;':"'",'&nbsp;':' '}[s])).replace(/\s+/g, ' ').trim().slice(0, limit);
 }
 export const utcDay = (now = Date.now()) => new Date(now).toISOString().slice(0, 10);
 export const beijingDay = (now = Date.now()) => new Date(now + 8 * 3600000).toISOString().slice(0, 10);
