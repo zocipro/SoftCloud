@@ -35,6 +35,42 @@ async function boundedBody(response: Response, maxBytes = 512000): Promise<strin
   try { while (true) { const {done, value} = await reader.read(); if (done) return text + decoder.decode(); bytes += value.byteLength; if (bytes > maxBytes) throw Error('信源响应超出读取上限'); text += decoder.decode(value, {stream: true}); } }
   finally { await reader.cancel(); }
 }
+function completeFeedPrefix(xml: string, required = 8) {
+  const root = /<(rss|feed)(?:\s|>)/i.exec(xml.slice(0,4096))?.[1].toLowerCase();
+  if (!root) return null;
+  let cdata = false, count = 0, end = 0;
+  for (const match of xml.matchAll(/<!\[CDATA\[|\]\]>|<\/(item|entry)\s*>/g)) {
+    if (match[0] === '<![CDATA[') cdata = true;
+    else if (match[0] === ']]>') cdata = false;
+    else if (!cdata && match[1] === (root === 'rss' ? 'item' : 'entry')) {
+      end = match.index! + match[0].length;
+      if (++count >= required) break;
+    }
+  }
+  return count >= required ? xml.slice(0,end) + (root === 'rss' ? '</channel></rss>' : '</feed>') : null;
+}
+export async function boundedFeed(response: Response, maxBytes = 512000) {
+  const reader = response.body?.getReader();
+  if (!reader) return '';
+  const decoder = new TextDecoder(); let bytes = 0, xml = '';
+  try {
+    while (true) {
+      const {done,value} = await reader.read();
+      if (done) return xml + decoder.decode();
+      const remaining = maxBytes - bytes;
+      xml += decoder.decode(value.subarray(0,Math.max(0,remaining)),{stream:true});
+      bytes += value.byteLength;
+      const prefix = completeFeedPrefix(xml);
+      if (prefix) return prefix;
+      if (bytes >= maxBytes) {
+        // Keep a complete recent entry rather than discarding a large valid feed.
+        const partial = completeFeedPrefix(xml,1);
+        if (partial) return partial;
+        throw Error('信源响应超出读取上限');
+      }
+    }
+  } finally { await reader.cancel(); }
+}
 async function hash(value: string) {
   return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value))), n => n.toString(16).padStart(2, '0')).join('');
 }
@@ -73,7 +109,7 @@ async function collect(env: Env) {
     const response = await fetch(s.url, {headers, signal: AbortSignal.timeout(15000)});
     if (response.status === 304) { await run(env.DB, 'UPDATE sources SET last_success=?,error=NULL WHERE id=?', Date.now(), s.id); return; }
     if (!response.ok) throw Error('HTTP ' + response.status);
-    const found = parseFeed(await boundedBody(response));
+    const found = parseFeed(await boundedFeed(response));
     if (!found.length) throw Error('未发现可读取的 RSS/Atom 内容');
     const now = Date.now();
     const rows = await Promise.all(found.map(async n => env.DB.prepare('INSERT OR IGNORE INTO items(id,source_id,url,title,body,published,discovered,archived) VALUES(?,?,?,?,?,?,?,?)').bind((await hash(n.url!)).slice(0, 24), s.id, n.url, n.title, n.body, n.published, now, Number(archiveItem(n.published, now)))));

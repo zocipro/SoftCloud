@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
-import worker,{parseFeed} from '../dist-test/worker.mjs';
+import worker,{parseFeed,boundedFeed} from '../dist-test/worker.mjs';
 import {eventHeat, isSelected, neuronReservation, reportWindow, archiveItem} from '../src/core.mjs';
 
 class DB {
@@ -33,3 +33,6 @@ test('search treats percent and underscore literally',async()=>{const e=environm
 test('daily article cap also blocks a queued new article',async()=>{const e=environment([{label:'PASS'}]);const row=await addItem(e.db);e.env.DAILY_ARTICLE_LIMIT='0';await consume(e.env,{kind:'item',id:row.id});assert.equal(e.prompts.length,0);assert.equal((await e.db.prepare('SELECT reserved FROM budgets').first()).reserved,0)});
 
 test('protocol recovery preserves old receipts and counts the same article once',async()=>{const e=environment([{label:'PASS'}]);const row=await addItem(e.db,{stage:'failed'});const oldId=row.id+':prefilter';const day=new Date().toISOString().slice(0,10);await e.db.prepare("INSERT INTO receipts(id,day,reserved,state,result,error) VALUES(?,?,7,'error',?,?)").bind(oldId,day,JSON.stringify({response:'invalid completion'}),'invalid JSON').run();await e.db.prepare('INSERT INTO budgets(day,reserved) VALUES(?,7)').bind(day).run();e.db.sqlite.exec(readFileSync(new URL('../migrations/0002_chat_protocol_recovery.sql',import.meta.url),'utf8'));e.env.DAILY_ARTICLE_LIMIT='1';await consume(e.env,{kind:'item',id:row.id});assert.equal((await e.db.prepare('SELECT stage FROM items').first()).stage,'score1');assert.equal(e.prompts.length,1);assert.equal((await e.db.prepare('SELECT result FROM receipts WHERE id=?').bind(oldId).first()).result,JSON.stringify({response:'invalid completion'}));assert.ok((await e.db.prepare('SELECT reserved FROM budgets').first()).reserved>7);await e.db.prepare("UPDATE items SET stage='prefilter'").run();await consume(e.env,{kind:'item',id:row.id});assert.equal(e.prompts.length,1)});
+
+
+test('large feeds retain complete entries and ignore closing tags inside CDATA',async()=>{const first='<item><title>Actual AI article</title><link>https://example.com/a</link><description><![CDATA[Example text </item> remains in this entry]]></description></item>';const xml='<rss><channel>'+first+'<item><title>Another</title><description>'+ 'x'.repeat(600)+'</description></item></channel></rss>';const prefix=await boundedFeed(new Response(xml),300);const entries=parseFeed(prefix);assert.equal(entries.length,1);assert.equal(entries[0].title,'Actual AI article');assert.ok(entries[0].body.includes('remains in this entry'));const eight='<rss><channel>'+first.repeat(10)+'</channel></rss>';assert.equal(parseFeed(await boundedFeed(new Response(eight))).length,8)});
