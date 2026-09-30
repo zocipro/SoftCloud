@@ -1,0 +1,10 @@
+CREATE TABLE stories (id TEXT PRIMARY KEY,title TEXT NOT NULL,root_fact_id TEXT NOT NULL,created INTEGER NOT NULL);
+ALTER TABLE events ADD COLUMN story_id TEXT;
+INSERT INTO stories(id,title,root_fact_id,created) SELECT id,title,id,created FROM events;
+UPDATE events SET story_id=id;
+CREATE INDEX event_story ON events(story_id);
+ALTER TABLE period_reports ADD COLUMN themes TEXT NOT NULL DEFAULT '[]';
+ALTER TABLE items ADD COLUMN indexable INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE sources ADD COLUMN version INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE feedback ADD COLUMN version INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE runs ADD COLUMN source_id TEXT;

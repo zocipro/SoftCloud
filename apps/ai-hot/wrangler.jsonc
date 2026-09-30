@@ -13,6 +13,7 @@
     {
       "binding": "DB",
       "database_name": "softcloud-ai-hot",
+      "database_id": "7581ec2c-b219-4598-bb4e-fc2a1566136a",
       "migrations_dir": "migrations"
     }
   ],

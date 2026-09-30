@@ -1,5 +1,9 @@
 packages:
   - '.'
+  - 'web'
+  - 'contracts'
+  - 'industry'
 onlyBuiltDependencies:
   - esbuild
   - workerd
+  - '@tailwindcss/oxide'

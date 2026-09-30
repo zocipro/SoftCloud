@@ -1,59 +1,8 @@
-<!doctype html>
-<html lang="zh-CN" data-theme="light">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>软云 AI 热点 · 精选、热点与日报 | SoftCloud</title>
-  <meta name="description" content="关注真正值得看的 AI 动态。在软云阅读中文摘要、追踪热点与查看每日精选，保留每一条原文来源。">
-  <link rel="icon" href="/assets/brand-icon.png"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="./hot.css">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem('softcloud-theme-blue')||'light'}catch{}</script>
-</head>
-<body class="hot-page">
-  <a class="skip-link" href="#content">跳到内容</a>
-  <svg class="svg-defs" aria-hidden="true"><defs>
-    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
-    <symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
-    <symbol id="star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></symbol>
-    <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
-    <symbol id="rss" viewBox="0 0 24 24"><path d="M5 5a14 14 0 0 1 14 14M5 11a8 8 0 0 1 8 8"/><circle cx="5" cy="19" r="1"/></symbol>
-    <symbol id="list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M3 6h1M3 12h1M3 18h1"/></symbol>
-    <symbol id="chart" viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 15l4-5 4 2 4-7"/></symbol>
-    <symbol id="paper" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
-  </defs></svg>
-  <header class="navbar"><div class="container nav-inner">
-    <a class="brand" href="/" aria-label="软云官网"><img src="/assets/brand-icon.png" width="34" height="34" alt=""><span>softcloud<span class="brand-period">.</span></span><span class="brand-cn">AI 热点</span></a>
-    <nav class="hot-topnav" aria-label="网站导航"><a href="/#project">探索产品</a><a href="/#tools">常用工具</a></nav>
-    <div class="nav-tools"><button class="icon-button" id="theme" type="button" aria-label="切换深色主题"><svg><use href="#sun"/></svg></button><a class="nav-cta" href="/">返回官网 <svg><use href="#arrow"/></svg></a></div>
-  </div></header>
-  <main class="container hot-main" id="content">
-    <div class="preview-banner" id="preview-banner" hidden>界面预览 · 下方为虚构示例，用于展示布局，正式页面只读取真实数据。</div>
-    <section class="hot-intro">
-      <div><p class="eyebrow"><span class="status-dot"></span> SOFTCLOUD / AI IN FOCUS</p><h1>追上 AI，<br><span>留点时间给自己。</span></h1><p class="hot-description">把纷繁的动态，整理成值得读的几条。<br>看中文摘要、追踪热点，也能沿着来源继续探索。</p></div>
-      <div class="intro-note"><p class="note-date" id="date-label"></p><span class="note-line"></span><p>少一点信息噪声<br>多一点有用发现</p><a href="/api/ai-hot/feed.xml" class="rss-link"><svg><use href="#rss"/></svg>订阅精选</a></div>
-    </section>
-    <div class="reading-layout">
-      <aside class="reading-nav"><nav aria-label="阅读栏目" id="views">
-        <button type="button" data-view="selected" class="active"><svg><use href="#star"/></svg>精选动态</button>
-        <button type="button" data-view="hot"><svg><use href="#chart"/></svg>当前热点</button>
-        <button type="button" data-view="all"><svg><use href="#list"/></svg>全部动态</button>
-        <button type="button" data-view="daily"><svg><use href="#paper"/></svg>每日早报</button>
-        <button type="button" data-view="starred"><svg><use href="#star"/></svg>我的收藏 <span id="star-count">0</span></button>
-        <button type="button" data-view="sources"><svg><use href="#rss"/></svg>信源一览</button>
-      </nav><div class="nav-bottom"><span class="status-dot"></span><span id="service-state">正在连接</span><p>收藏保存在当前浏览器<br>每篇摘要都有原文出处</p><a href="./about.html">关于与开源来源 <span>↗</span></a></div></aside>
-      <section class="reading-content" aria-labelledby="list-heading">
-        <div class="reading-heading"><div><p class="eyebrow" id="view-kicker">HANDPICKED FOR YOU</p><h2 id="list-heading">值得读的几条</h2></div><span class="result-count" id="result-count"></span></div>
-        <form class="search-form" id="search-form" role="search"><svg><use href="#search"/></svg><label class="sr-only" for="query">搜索 AI 动态</label><input id="query" type="search" placeholder="搜索模型、产品或你关心的话题…" maxlength="100"><button type="submit">搜索</button></form>
-        <div class="category-tabs" id="categories" aria-label="内容分类"></div>
-        <p class="reader-notice" id="notice" role="status" aria-live="polite"></p>
-        <div class="article-list" id="articles" aria-live="polite"><div class="empty-state">正在读取最新动态…</div></div>
-        <button class="more-button" type="button" id="more" hidden>继续阅读更多</button>
-      </section>
-      <aside class="reading-side"><section class="side-panel"><p class="eyebrow">WHAT'S HAPPENING</p><h3>此刻大家在看</h3><div id="hot-preview"><p class="side-empty">正在读取热点…</p></div><button type="button" class="side-link" data-view="hot">查看热点榜 <span>↗</span></button></section>
-        <section class="side-panel daily-panel"><p class="eyebrow">YOUR DAILY BRIEF</p><div class="paper-emblem" aria-hidden="true"><svg><use href="#paper"/></svg><span>AI<br>早报</span></div><h3>给信息一个停靠点。</h3><p id="report-preview">每天早上，把已经收录的精选整理成一份早报。</p><button type="button" class="side-link" data-view="daily">翻开每日早报 <span>↗</span></button></section>
-        <p class="side-caption">基于 AIHOT 开源框架适配<br>由软云提供界面与服务</p>
-      </aside>
-    </div>
-  </main>
-  <footer class="footer container"><p>© SoftCloud · 让想象，成为日常。</p><div><a href="./about.html">关于热点</a><a href="/tools/credits.html">开源许可</a><a href="./admin.html">管理</a></div></footer>
-  <dialog id="detail"><button type="button" class="dialog-close" aria-label="关闭详情">×</button><div id="detail-content"></div></dialog>
-  <script type="module" src="./hot.js?v=2"></script>
-</body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>软云 AI 热点 · SoftCloud</title><link rel="icon" href="/assets/brand-icon.png"><script>try{const t=localStorage.getItem('softcloud-theme-blue');document.documentElement.dataset.theme=t==='dark'||((!t||t==='auto')&&matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light'}catch{}</script>  <script type="module" crossorigin src="/tools/ai-hot/assets/index-DSi5StXb.js"></script>
+  <link rel="modulepreload" crossorigin href="/tools/ai-hot/assets/react-yIOJJ3r4.js">
+  <link rel="modulepreload" crossorigin href="/tools/ai-hot/assets/utils-CJMNwTXo.js">
+  <link rel="modulepreload" crossorigin href="/tools/ai-hot/assets/hooks-Byndm7TZ.js">
+  <link rel="modulepreload" crossorigin href="/tools/ai-hot/assets/jsx-runtime-BO4-n5-Y.js">
+  <link rel="modulepreload" crossorigin href="/tools/ai-hot/assets/time-3NajA8jO.js">
+  <link rel="stylesheet" crossorigin href="/tools/ai-hot/assets/index-BL0P_EjX.css">
+</head><body><div id="root"><p style="padding:24px">正在读取 AI 动态…</p></div></body></html>

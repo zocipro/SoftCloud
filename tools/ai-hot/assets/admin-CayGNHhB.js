@@ -1,0 +1,1 @@
+import{T as e}from"./utils-CJMNwTXo.js";function t(){throw e(`/admin/sources`)}function n(){return null}export{n as default,t as loader};

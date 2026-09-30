@@ -1,0 +1,259 @@
+[
+  {
+    "index": true,
+    "module": "routes/home.tsx",
+    "id": "routes/home"
+  },
+  {
+    "path": "all",
+    "module": "routes/all.tsx",
+    "id": "routes/all"
+  },
+  {
+    "path": "all/search-busy",
+    "module": "routes/search-busy.tsx",
+    "id": "all-search-busy"
+  },
+  {
+    "path": "search-busy",
+    "module": "routes/search-busy.tsx",
+    "id": "search-busy"
+  },
+  {
+    "path": "items/:id",
+    "module": "routes/item.tsx",
+    "id": "routes/item"
+  },
+  {
+    "path": "items/:id/original",
+    "module": "routes/item-original.tsx",
+    "id": "item-original"
+  },
+  {
+    "path": "hot",
+    "module": "routes/hot.tsx",
+    "id": "routes/hot"
+  },
+  {
+    "path": "story/:publicId",
+    "module": "routes/story.tsx",
+    "id": "routes/story"
+  },
+  {
+    "path": "daily",
+    "module": "routes/report-latest.tsx",
+    "id": "daily-latest"
+  },
+  {
+    "path": "daily/archive",
+    "module": "routes/daily-archive.tsx",
+    "id": "routes/daily-archive"
+  },
+  {
+    "path": "daily/:key",
+    "module": "routes/report-detail.tsx",
+    "id": "daily-detail"
+  },
+  {
+    "path": "weekly",
+    "module": "routes/report-latest.tsx",
+    "id": "weekly-latest"
+  },
+  {
+    "path": "weekly/:key",
+    "module": "routes/report-detail.tsx",
+    "id": "weekly-detail"
+  },
+  {
+    "path": "monthly",
+    "module": "routes/report-latest.tsx",
+    "id": "monthly-latest"
+  },
+  {
+    "path": "monthly/:key",
+    "module": "routes/report-detail.tsx",
+    "id": "monthly-detail"
+  },
+  {
+    "path": "topics",
+    "module": "routes/topics.tsx",
+    "id": "routes/topics"
+  },
+  {
+    "path": "topics/:slug",
+    "module": "routes/topic.tsx",
+    "id": "topic"
+  },
+  {
+    "path": "topics/:slug/page/:page",
+    "module": "routes/topic.tsx",
+    "id": "topic-page"
+  },
+  {
+    "path": "about",
+    "module": "routes/about.tsx",
+    "id": "routes/about"
+  },
+  {
+    "path": "terms",
+    "module": "routes/terms.tsx",
+    "id": "routes/terms"
+  },
+  {
+    "path": "privacy",
+    "module": "routes/privacy.tsx",
+    "id": "routes/privacy"
+  },
+  {
+    "path": "changelog",
+    "module": "routes/changelog.tsx",
+    "id": "routes/changelog"
+  },
+  {
+    "path": "feedback",
+    "module": "routes/feedback.tsx",
+    "id": "routes/feedback"
+  },
+  {
+    "path": "more",
+    "module": "routes/more.tsx",
+    "id": "routes/more"
+  },
+  {
+    "path": "starred",
+    "module": "routes/starred.tsx",
+    "id": "routes/starred"
+  },
+  {
+    "path": "agent",
+    "module": "routes/agent.tsx",
+    "id": "routes/agent"
+  },
+  {
+    "path": "codex-reset",
+    "module": "routes/codex-reset.tsx",
+    "id": "routes/codex-reset"
+  },
+  {
+    "path": "codex-reset/history/:date",
+    "module": "routes/codex-reset.tsx",
+    "id": "codex-reset-day"
+  },
+  {
+    "path": "leaderboard/sources",
+    "module": "routes/leaderboard-sources.tsx",
+    "id": "routes/leaderboard-sources"
+  },
+  {
+    "path": "leaderboard/sources/:key",
+    "module": "routes/leaderboard-source.tsx",
+    "id": "routes/leaderboard-source"
+  },
+  {
+    "path": "leaderboard/rules",
+    "module": "routes/leaderboard-rules.tsx",
+    "id": "routes/leaderboard-rules"
+  },
+  {
+    "path": "leaderboard/:slug",
+    "module": "routes/leaderboard-model.tsx",
+    "id": "routes/leaderboard-model"
+  },
+  {
+    "path": "admin/login",
+    "module": "routes/admin-login.tsx",
+    "id": "routes/admin-login"
+  },
+  {
+    "module": "routes/leaderboard-boards.tsx",
+    "id": "routes/leaderboard-boards",
+    "children": [
+      {
+        "path": "leaderboard",
+        "module": "routes/leaderboard.tsx",
+        "id": "leaderboard"
+      },
+      {
+        "path": "leaderboard/category/:key",
+        "module": "routes/leaderboard.tsx",
+        "id": "leaderboard-category"
+      }
+    ]
+  },
+  {
+    "module": "routes/admin/layout.tsx",
+    "id": "admin-layout",
+    "children": [
+      {
+        "path": "admin",
+        "module": "routes/admin/index.tsx",
+        "id": "routes/admin/index"
+      },
+      {
+        "path": "admin/content",
+        "module": "routes/admin/content.tsx",
+        "id": "routes/admin/content"
+      },
+      {
+        "path": "admin/content/:id",
+        "module": "routes/admin/content-item.tsx",
+        "id": "routes/admin/content-item"
+      },
+      {
+        "path": "admin/sources",
+        "module": "routes/admin/sources.tsx",
+        "id": "routes/admin/sources"
+      },
+      {
+        "path": "admin/sources/new",
+        "module": "routes/admin/source-new.tsx",
+        "id": "routes/admin/source-new"
+      },
+      {
+        "path": "admin/sources/:id",
+        "module": "routes/admin/source.tsx",
+        "id": "routes/admin/source"
+      },
+      {
+        "path": "admin/monitor",
+        "module": "routes/admin/monitor.tsx",
+        "id": "routes/admin/monitor"
+      },
+      {
+        "path": "admin/feedback",
+        "module": "routes/admin/feedback.tsx",
+        "id": "routes/admin/feedback"
+      },
+      {
+        "path": "admin/runs",
+        "module": "routes/admin/runs.tsx",
+        "id": "routes/admin/runs"
+      },
+      {
+        "path": "admin/models",
+        "module": "routes/admin/models.tsx",
+        "id": "routes/admin/models"
+      },
+      {
+        "path": "admin/selectbench",
+        "module": "routes/admin/selectbench.tsx",
+        "id": "routes/admin/selectbench"
+      },
+      {
+        "path": "admin/selectbench/:runId",
+        "module": "routes/admin/selectbench-run.tsx",
+        "id": "routes/admin/selectbench-run"
+      },
+      {
+        "path": "admin/settings",
+        "module": "routes/admin/settings.tsx",
+        "id": "routes/admin/settings"
+      },
+      {
+        "path": "admin/audit",
+        "module": "routes/admin/audit.tsx",
+        "id": "routes/admin/audit"
+      }
+    ]
+  }
+]

@@ -10,7 +10,11 @@
     "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
-    "fast-xml-parser": "^5.0.0"
+    "fast-xml-parser": "^5.0.0",
+    "@modelcontextprotocol/server": "2.1.0",
+    "zod": "4.6.5",
+    "@aihot/contracts": "workspace:*",
+    "@aihot/industry": "workspace:*"
   },
   "devDependencies": {
     "wrangler": "^4.0.0",

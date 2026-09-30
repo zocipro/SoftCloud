@@ -30,3 +30,5 @@ export function promptText(name: string, seen: string[] = []): string {
   if (seen.includes(name) || !prompts[name]) throw Error('提示词引用无效: ' + name);
   return prompts[name].replace(/\{\{>\s*([\w-]+)\s*\}\}/g, (_, key) => promptText(key, [...seen, name])).replaceAll('{{siteName}}', '软云 AI 热点');
 }
+
+export const promptVersion=(...names:string[])=>'upstream-885b736-'+names.join('+');

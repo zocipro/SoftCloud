@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BO4-n5-Y.js";var t=e();function n({children:e,className:n=``}){return(0,t.jsxs)(`div`,{className:`flex items-center gap-2.5 text-[12px] font-semibold tracking-[0.3em] text-accent ${n}`,children:[(0,t.jsx)(`span`,{className:`h-[2px] w-6 rounded-full bg-accent`,"aria-hidden":`true`}),e]})}export{n as t};
