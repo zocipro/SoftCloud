@@ -1,0 +1,1 @@
+import"./jsx-runtime-BO4-n5-Y.js";import{at as e}from"./index-D6zQlJgi.js";import{SearchBusy as t}from"./all-9U7neBE6.js";function n(){return[{title:e(`搜索繁忙`)},{name:`robots`,content:`noindex, follow`}]}function r(){return{"Cache-Control":`no-store`}}var i=t;export{i as default,r as headers,n as meta};
