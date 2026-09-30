@@ -1,0 +1,1 @@
+import{r as e}from"./index-B4sB_9Zl.js";import t,{headers as n,meta as r}from"./item-CvIyaEyj.js";async function i({params:t,request:n}){return{item:await e(`/api/ai-hot/site/items/${encodeURIComponent(t.id)}/original`,{signal:n.signal})}}export{t as default,n as headers,i as loader,r as meta};

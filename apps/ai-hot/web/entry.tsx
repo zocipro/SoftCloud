@@ -1,6 +1,6 @@
 import {createElement,useEffect,type ComponentType} from 'react';
 import {createRoot} from 'react-dom/client';
-import {createBrowserRouter,RouterProvider,useLoaderData,useParams,useMatches,useLocation,ScrollRestoration,type LoaderFunctionArgs,type RouteObject} from 'react-router';
+import {createBrowserRouter,RouterProvider,useLoaderData,useParams,useMatches,useLocation,ScrollRestoration,type LoaderFunctionArgs,type RouteObject,type MetaDescriptor} from 'react-router';
 import App,{loader as rootLoader,ErrorBoundary} from './app/root';
 import manifest from './manifest.json';
 
@@ -9,7 +9,7 @@ interface PageModule {
   default:ComponentType<{loaderData:unknown;params:Record<string,string|undefined>}>;
   ErrorBoundary?:ComponentType;
   loader?:(args:LoaderFunctionArgs)=>unknown;
-  meta?:(args:{loaderData:unknown;params:Record<string,string|undefined>;location:ReturnType<typeof useLocation>;matches:ReturnType<typeof useMatches>})=>Array<{title?:string;name?:string;content?:string}>;
+  meta?:(args:{loaderData:unknown;params:Record<string,string|undefined>;location:ReturnType<typeof useLocation>;matches:ReturnType<typeof useMatches>})=>MetaDescriptor[];
 }
 const modules=import.meta.glob<PageModule>('./app/routes/**/*.tsx');
 function route(entry:Entry):RouteObject {
@@ -17,7 +17,24 @@ function route(entry:Entry):RouteObject {
     const page=await modules['./app/'+entry.module]();
     function Component(){
       const loaderData=useLoaderData(),params=useParams(),location=useLocation(),matches=useMatches();
-      useEffect(()=>{const title=page.meta?.({loaderData,params,location,matches}).find(m=>m.title)?.title;document.title=title??'软云 AI 热点 · SoftCloud';},[location.key]);
+      useEffect(()=>{
+        if(matches.at(-1)?.id!==entry.id)return;
+        const descriptors=page.meta?.({loaderData,params,location,matches})??[];
+        const titled=descriptors.find(m=>'title' in m);
+        document.title=titled&&'title' in titled?String(titled.title):'软云 AI 热点 · SoftCloud';
+        document.head.querySelectorAll('[data-ai-hot-meta]').forEach(n=>n.remove());
+        document.head.querySelectorAll('meta[name="description"],link[rel="canonical"]').forEach(n=>n.remove());
+        const nodes:HTMLElement[]=[];
+        for(const m of descriptors){
+          let node:HTMLElement|null=null;
+          if('name' in m||'property' in m){node=document.createElement('meta');if('name' in m&&m.name)node.setAttribute('name',String(m.name));if('property' in m&&m.property)node.setAttribute('property',String(m.property));node.setAttribute('content',String(m.content??''));}
+          else if('tagName' in m&&m.tagName==='link'&&m.rel==='canonical'){node=document.createElement('link');node.setAttribute('rel','canonical');node.setAttribute('href',String(m.href));}
+          else if('script:ld+json' in m){node=document.createElement('script');node.setAttribute('type','application/ld+json');node.textContent=JSON.stringify(m['script:ld+json']);}
+          if(node){node.dataset.aiHotMeta='true';document.head.append(node);nodes.push(node);}
+        }
+        if(location.pathname.startsWith('/admin')){const node=document.createElement('meta');node.name='robots';node.content='noindex, nofollow';node.dataset.aiHotMeta='true';document.head.append(node);nodes.push(node);}
+        return()=>nodes.forEach(n=>n.remove());
+      },[location.key]);
       return createElement(page.default,{loaderData,params});
     }
     return {Component,ErrorBoundary:page.ErrorBoundary,loader:page.loader?async(args:LoaderFunctionArgs)=>{

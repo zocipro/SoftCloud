@@ -50,7 +50,7 @@ export function pageMeta(input: PageMetaInput): MetaDescriptor[] {
   const title = input.title ? (input.rawTitle ? input.title : titled(input.title)) : HOME_TITLE;
   const description = input.description ?? SITE_DESCRIPTION;
   const url = `${base}${input.path}`;
-  const image = input.image ? (input.image.startsWith("http") ? input.image : `${base}${input.image}`) : `${base}/og/site.png`;
+  const image = input.image?.startsWith("http") ? input.image : `${typeof window!=="undefined"?window.location.origin:new URL(base).origin}/assets/brand-icon.png`;
   const tags: MetaDescriptor[] = [
     { title },
     { name: "description", content: description },
@@ -61,8 +61,6 @@ export function pageMeta(input: PageMetaInput): MetaDescriptor[] {
     { property: "og:description", content: description },
     { property: "og:url", content: url },
     { property: "og:image", content: image },
-    { property: "og:image:width", content: "1200" },
-    { property: "og:image:height", content: "630" },
     { property: "og:locale", content: SITE.locale.replace("-", "_") },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: input.title ?? HOME_TITLE },
@@ -82,7 +80,7 @@ export function organizationLd() {
     "@type": "Organization",
     name: SITE.organization.name,
     url: base,
-    logo: `${base}/icon.png`,
+    logo: `${typeof window!=="undefined"?window.location.origin:new URL(base).origin}/assets/brand-icon.png`,
     ...(founder ? { founder: { "@type": "Person", name: founder.name, ...(founder.description ? { description: founder.description } : {}), ...(founder.url ? { sameAs: [founder.url] } : {}) } } : {}),
   };
 }
