@@ -1,6 +1,8 @@
 # 软云 AI 热点
 
-AIHOT 原版阅读界面与核心整理流程在 SoftCloud 内的免费 Cloudflare 适配。网页入口 `/tools/ai-hot/`，同域 Worker API `/api/ai-hot`；沿用软云蓝白、暗色主题和手机导航。
+当前线上是早期免费 Cloudflare 适配，尚未达到完整功能一致。2026-09-30 用户明确要求保留开源项目全部功能，仅改软云主题。完整上游版本已接入 `fullstack/`，验收与上线条件见 [FUNCTIONAL-PARITY.md](FUNCTIONAL-PARITY.md)。后续完整部署使用此版本；下文记录旧适配版的现有状态，不能作为“100% 复刻”的说明。
+
+旧版网页入口 `/tools/ai-hot/`，同域 Worker API `/api/ai-hot`；沿用软云蓝白、暗色主题和手机导航。
 
 ## 已接入
 
@@ -46,4 +48,4 @@ pnpm run build
 
 管理入口 `/tools/ai-hot/admin`。需要在 Worker Secrets 由站主设置 `ADMIN_PASSWORD`（至少 12 字符），未设置拒绝登录。8 小时管理会话使用 Secure/HttpOnly/SameSite Cookie；修改操作必须提供 CSRF。旧 ADMIN_TOKEN 仅用于既有接口兼容，至少 24 字符，前台不会保存。
 
-30 个后端测试使用内存 SQLite 和模拟 AI，7 个前端测试覆盖收藏、Markdown、请求取消和历史缓存；不产生真实模型费用，不代表上游完整测试套件通过。
+31 个旧适配版后端测试使用内存 SQLite 和模拟 AI，7 个旧版前端测试覆盖收藏、Markdown、请求取消和历史缓存；不产生真实模型费用。完整上游版本的检查记录另见 `fullstack/VERIFICATION.md`。

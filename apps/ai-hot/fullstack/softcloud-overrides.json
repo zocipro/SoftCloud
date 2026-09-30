@@ -1,0 +1,15 @@
+{
+  "apps/web/app/app.css": "SoftCloud light/dark design tokens only",
+  "apps/web/app/components/Logo.tsx": "SoftCloud brand wordmark and icon",
+  "apps/web/app/lib/local-state.ts": "Keep existing SoftCloud browser storage keys",
+  "apps/web/app/root.tsx": "SoftCloud favicon and theme-color metadata only",
+  "industry/site.ts": "SoftCloud site identity and public MCP prefix",
+  "industry/pages/privacy.md": "Previously approved site privacy copy",
+  "industry/pages/terms.md": "Previously approved site terms copy",
+  "industry/brand/apple-icon.png": "SoftCloud brand image",
+  "industry/brand/icon-192.png": "SoftCloud brand image",
+  "industry/brand/icon.png": "SoftCloud brand image",
+  "industry/brand/favicon.ico": "SoftCloud PNG wrapped in ICO format",
+  "industry/brand/logo.svg": "SoftCloud vector wordmark",
+  "apps/web/tests/local-state.test.ts": "Bookmark fixture uses the existing SoftCloud storage key; test assertions unchanged"
+}
