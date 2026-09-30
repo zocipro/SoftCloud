@@ -18,6 +18,12 @@ const ctx={waitUntil(p){p.catch(()=>{})}};
 const get=(env,path,options)=>worker.fetch(new Request('https://zoci.pro/api/ai-hot'+path,options),env,ctx);
 
 test('RSS and Atom keep HTTPS sources and reject script links',()=>{const rss=parseFeed('<rss><channel><item><title>A &amp; B&#039;s</title><link>https://example.com/a</link><description><![CDATA[<p>A useful summary</p>]]></description><pubDate>Tue, 29 Sep 2026 01:00:00 GMT</pubDate></item><item><title>Unsafe</title><link>javascript:alert(1)</link></item></channel></rss>');assert.equal(rss.length,1);assert.equal(rss[0].title,"A & B's");assert.equal(rss[0].body,'A useful summary');const atom=parseFeed('<feed><entry><title>Atom</title><link rel="self" href="https://example.com/raw"/><link rel="alternate" href="https://example.com/article"/><summary>Hello</summary></entry></feed>');assert.equal(atom[0].url,'https://example.com/article')});
+test('HTTPS feeds upgrade only same-host legacy HTTP article links',()=>{
+  const xml='<rss><channel><item><title>BAIR article</title><link>http://bair.berkeley.edu/blog/article/</link></item><item><title>Other host</title><link>http://other.example/article</link></item><item><title>Credentials</title><link>http://user:password@bair.berkeley.edu/blog/private/</link></item></channel></rss>';
+  assert.deepEqual(parseFeed(xml,Date.now(),'https://bair.berkeley.edu/blog/feed.xml').map(i=>i.url),['https://bair.berkeley.edu/blog/article/']);
+  assert.equal(parseFeed(xml).length,0);
+  assert.equal(parseFeed(xml,Date.now(),'http://bair.berkeley.edu/blog/feed.xml').length,0);
+});
 test('two scores use exact thresholds without rounding into selection',()=>{assert.equal(isSelected(59,60,60),false);assert.equal(isSelected(59,61,60),true);assert.equal(isSelected(75,76,76),false);assert.equal(isSelected(null,80,60),false);assert.equal(isSelected(90,90,undefined),false)});
 test('repeat publications from one source never inflate event heat',()=>{const now=Date.now();assert.equal(eventHeat([{source_id:'a',published:now},{source_id:'a',published:now}],now),1);assert.equal(eventHeat([{source_id:'a',published:now},{source_id:'b',published:now-86400000}],now),1.5);assert.equal(eventHeat([{source_id:'a',published:now,archived:1}],now),0)});
 test('old content and morning report use actual publish time in Beijing',()=>{const now=Date.now();assert.equal(archiveItem(now-49*3600000,now),true);const w=reportWindow('2026-09-30');assert.equal(new Date(w.end).toISOString(),'2026-09-30T00:00:00.000Z');assert.equal(w.end-w.start,86400000)});

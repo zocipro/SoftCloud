@@ -88,15 +88,23 @@ function value(node: unknown): string {
   if (node && typeof node === 'object') return value((node as FeedNode)['#text'] ?? '');
   return String(node ?? '');
 }
-export function parseFeed(xml: string, now = Date.now()) {
+export function parseFeed(xml: string, now = Date.now(), feedUrl?: string) {
   // Entity expansion is disabled; public feeds remain untrusted input.
   const doc = new XMLParser({ignoreAttributes: false, attributeNamePrefix: '@_', processEntities: false}).parse(xml);
   const raw = doc?.rss?.channel?.item ?? doc?.feed?.entry ?? [];
   const nodes: FeedNode[] = Array.isArray(raw) ? raw : [raw];
+  const secureFeed = safeUrl(feedUrl);
+  const feedHost = secureFeed ? new URL(secureFeed).hostname : null;
   return nodes.slice(0, 12).map(n => {
     const links = Array.isArray(n.link) ? n.link : [n.link];
     const link = links.find(l => typeof l === 'string' || !l?.['@_rel'] || l?.['@_rel'] === 'alternate');
-    const url = safeUrl(typeof link === 'string' ? link : link?.['@_href'] ?? value(link));
+    let url: string | null = null;
+    try {
+      const article = new URL(typeof link === 'string' ? link : link?.['@_href'] ?? value(link));
+      // Older feeds (including BAIR) retain HTTP permalinks on their HTTPS host.
+      if (article.protocol === 'http:' && article.hostname === feedHost) article.protocol = 'https:';
+      url = safeUrl(article.href);
+    } catch { /* Invalid article URLs are omitted below. */ }
     const title = cleanText(value(n.title), 500);
     const date = Date.parse(value(n.pubDate ?? n.published ?? n.updated ?? n['dc:date']));
     return {url, title, body: cleanText(value(n['content:encoded'] ?? n.content ?? n.description ?? n.summary)), published: Number.isFinite(date) && date <= now + 3600000 ? Math.min(date, now) : now};
@@ -117,7 +125,7 @@ async function collect(env: Env, sourceId?:string) {
     const response = await fetch(s.url, {headers, signal: AbortSignal.timeout(15000)});
     if (response.status === 304) { await run(env.DB, 'UPDATE sources SET last_success=?,error=NULL WHERE id=?', Date.now(), s.id); return; }
     if (!response.ok) throw Error('HTTP ' + response.status);
-    const found = parseFeed(await boundedFeed(response));
+    const found = parseFeed(await boundedFeed(response), Date.now(), s.url);
     if (!found.length) throw Error('未发现可读取的 RSS/Atom 内容');
     const now = Date.now();
     const rows = await Promise.all(found.map(async n => env.DB.prepare('INSERT OR IGNORE INTO items(id,source_id,url,title,body,published,discovered,archived) VALUES(?,?,?,?,?,?,?,?)').bind((await hash(n.url!)).slice(0, 24), s.id, n.url, n.title, n.body, n.published, now, Number(archiveItem(n.published, now)))));
@@ -279,7 +287,7 @@ async function route(request: Request, env: Env): Promise<Response> {
   if(path==='/site/feedback')return feedbackApi(request,env);
   if(path==='/mcp')return mcpApi(request,env);
   if(path.startsWith('/v1/')&&request.method==='OPTIONS')return new Response(null,{status:204,headers:{'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET,HEAD,OPTIONS','Access-Control-Allow-Headers':'Accept','Access-Control-Max-Age':'600'}});
-  const management=await adminApi(request,env,path,async(feedUrl)=>{const started=Date.now();const response=await fetch(feedUrl,{signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error('HTTP '+response.status);const items=parseFeed(await boundedFeed(response));return {ms:Date.now()-started,count:items.length,items:items.map(i=>({title:i.title,url:i.url,publishedAt:new Date(i.published).toISOString(),excerpt:i.body,body:i.body}))};});
+  const management=await adminApi(request,env,path,async(feedUrl)=>{const started=Date.now();const response=await fetch(feedUrl,{signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error('HTTP '+response.status);const items=parseFeed(await boundedFeed(response), Date.now(), feedUrl);return {ms:Date.now()-started,count:items.length,items:items.map(i=>({title:i.title,url:i.url,publishedAt:new Date(i.published).toISOString(),excerpt:i.body,body:i.body}))};});
   if(management)return management;
   if(path==='/admin' && request.method==='GET' && await authorized(request,env))return json({status:await status(env)});
   if (path.startsWith('/admin')) {
