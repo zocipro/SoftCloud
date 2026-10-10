@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <defs>
+    <radialGradient id="bg"><stop stop-color="#dceff9"/><stop offset="1" stop-color="#f1f7fc"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dy="9" stdDeviation="12" flood-color="#477d9b" flood-opacity=".12"/></filter>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)"/>
+  <g font-family="Inter,Arial,PingFang SC,Microsoft YaHei,sans-serif" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="38" y="44" width="354" height="310" rx="20" fill="#fff" stroke="#d2e5f0" filter="url(#shadow)"/>
+    <text x="62" y="78" fill="#25465d" font-size="16" font-weight="600">搜索押韵</text>
+    <rect x="62" y="97" width="306" height="46" rx="10" fill="#f1f7fc" stroke="#d2e5f0"/>
+    <circle cx="83" cy="117" r="6" stroke="#167eaa" stroke-width="2"/>
+    <path d="m88 122 5 5" stroke="#167eaa" stroke-width="2"/>
+    <text x="109" y="126" fill="#25465d" font-size="16">阳光</text>
+    <rect x="62" y="159" width="65" height="28" rx="7" fill="#167eaa"/>
+    <text x="94.5" y="178" fill="#fff" font-size="12" text-anchor="middle">单押</text>
+    <text x="163" y="178" fill="#506e81" font-size="12" text-anchor="middle">双押</text>
+    <text x="231" y="178" fill="#506e81" font-size="12" text-anchor="middle">多押</text>
+    <text x="62" y="216" fill="#506e81" font-size="11">灵感词语 · 示例</text>
+    <g fill="#f1f7fc" stroke="#d2e5f0">
+      <rect x="62" y="231" width="94" height="55" rx="10"/>
+      <rect x="168" y="231" width="94" height="55" rx="10"/>
+      <rect x="274" y="231" width="94" height="55" rx="10"/>
+    </g>
+    <g fill="#167eaa" font-size="18" text-anchor="middle">
+      <text x="109" y="265">远方</text><text x="215" y="265">理想</text><text x="321" y="265">绽放</text>
+    </g>
+    <text x="62" y="326" fill="#506e81" font-size="12">找到词语，继续探索彼此的关联</text>
+    <path d="M397 199h34m-8-8 8 8-8 8" stroke="#8db9ce" stroke-width="2"/>
+    <rect x="448" y="84" width="154" height="230" rx="18" fill="#fff" stroke="#d2e5f0" filter="url(#shadow)"/>
+    <circle cx="525" cy="128" r="23" fill="#e5f2f9"/>
+    <rect x="519" y="114" width="12" height="20" rx="6" stroke="#167eaa" stroke-width="2"/>
+    <path d="M514 129v3a11 11 0 0 0 22 0v-3m-11 14v7m-7 0h14" stroke="#167eaa" stroke-width="2"/>
+    <text x="525" y="178" fill="#25465d" font-size="16" font-weight="600" text-anchor="middle">一起共创</text>
+    <text x="525" y="206" fill="#506e81" font-size="12" text-anchor="middle">分享押韵搭配</text>
+    <text x="525" y="229" fill="#506e81" font-size="12" text-anchor="middle">核对韵母与声调</text>
+    <rect x="467" y="254" width="116" height="34" rx="8" fill="#e5f2f9"/>
+    <text x="525" y="276" fill="#167eaa" font-size="12" text-anchor="middle">登录后投稿</text>
+  </g>
+</svg>

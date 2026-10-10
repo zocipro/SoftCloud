@@ -181,7 +181,7 @@ h3 { margin-top: 21px; font-size: clamp(25px, 2.4vw, 34px); font-weight: 600; le
 .back-top { display: grid; place-items: center; border: 1px solid var(--border); border-radius: 50%; width: 56px; height: 56px; font-size: 24px; }
 .back-top:hover { background: var(--accent); color: var(--accent-ink); }
 .footer-bottom { padding: 25px 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 12px; color: var(--subtle); }
-.footer-bottom nav { display: flex; gap: 24px; color: var(--muted); } .footer-bottom > span { font-size: 10px; letter-spacing: 1.1px; }
+.footer-bottom nav { display: flex; flex-wrap: wrap; gap: 12px 24px; color: var(--muted); } .footer-bottom > span { font-size: 10px; letter-spacing: 1.1px; }
 .reveal.is-pending { opacity: 0; transform: translateY(22px); } .reveal { transition: opacity .8s var(--ease), transform .8s var(--ease); } .reveal.visible { opacity: 1; }
 
 @media (min-width: 1600px) { .hero { min-height: 820px; } .hero-visual { height: 680px; } }
