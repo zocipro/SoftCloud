@@ -1,1 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none"><defs><radialGradient id="bg"><stop stop-color="#dceff9"/><stop offset="1" stop-color="#f1f7fc"/></radialGradient><filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dy="9" stdDeviation="12" flood-color="#477d9b" flood-opacity=".12"/></filter></defs><rect width="640" height="400" fill="url(#bg)"/><g font-family="Inter,Arial,PingFang SC,Microsoft YaHei,sans-serif" stroke-linecap="round" stroke-linejoin="round"><rect x="45" y="82" width="189" height="235" rx="17" fill="#fff" stroke="#d2e5f0" filter="url(#shadow)"/><text x="66" y="113" fill="#18394c" font-size="15" >你的日常选择</text><path d="M66 134h104" stroke="#dbe8f0" stroke-width="4" /><path d="M66 144h82" stroke="#dbe8f0" stroke-width="4" /><rect x="64" y="166" width="151" height="32" rx="8" fill="#fff" stroke="#d2e5f0" /><circle cx="80" cy="182" r="5" stroke="#167eaa" fill="#fff"/><path d="M96 182h72" stroke="#91b7cd" stroke-width="4" /><rect x="64" y="209" width="151" height="32" rx="8" fill="#e8f5fc" stroke="#d2e5f0" /><circle cx="80" cy="225" r="5" stroke="#167eaa" fill="#167eaa"/><path d="M96 225h59" stroke="#91b7cd" stroke-width="4" /><rect x="64" y="252" width="151" height="32" rx="8" fill="#fff" stroke="#d2e5f0" /><circle cx="80" cy="268" r="5" stroke="#167eaa" fill="#fff"/><path d="M96 268h46" stroke="#91b7cd" stroke-width="4" /><path d="M239 199h43 M273 191l9 8-9 8" stroke="#7baac2" stroke-width="2" /><rect x="294" y="42" width="302" height="316" rx="20" fill="#fff" stroke="#d2e5f0" filter="url(#shadow)"/><text x="316" y="71" fill="#506e81" font-size="12" >人格结果</text><text x="573" y="71" fill="#506e81" font-size="11" text-anchor="end">示意</text><rect x="316" y="92" width="65" height="65" rx="16" fill="#e8f5fc" stroke="#d2e5f0" /><circle cx="341" cy="115" r="3" fill="#167eaa"/><circle cx="358" cy="115" r="3" fill="#167eaa"/><path d="M337 130q12 12 25 0" stroke="#167eaa" stroke-width="2" /><text x="395" y="118" fill="#18394c" font-size="30" font-weight="600">CTRL</text><text x="396" y="143" fill="#167eaa" font-size="14" >拿捏者</text><path d="M316 179H572" stroke="#dbe8f0" stroke-width="2" /><text x="316" y="202" fill="#506e81" font-size="12" >人格解读</text><path d="M316 217h245" stroke="#dbe8f0" stroke-width="4" /><path d="M316 227h210" stroke="#dbe8f0" stroke-width="4" /><text x="316" y="257" fill="#506e81" font-size="12" >15 维度</text><text x="319" y="279" fill="#506e81" font-size="11" >自我</text><rect x="319" y="292" width="8" height="18" rx="4" fill="#c4dfed"/><rect x="331" y="292" width="8" height="18" rx="4" fill="#7eb6cf"/><rect x="343" y="292" width="8" height="18" rx="4" fill="#167eaa"/><text x="371" y="279" fill="#506e81" font-size="11" >情感</text><rect x="371" y="292" width="8" height="18" rx="4" fill="#7eb6cf"/><rect x="383" y="292" width="8" height="18" rx="4" fill="#167eaa"/><rect x="395" y="292" width="8" height="18" rx="4" fill="#c4dfed"/><text x="423" y="279" fill="#506e81" font-size="11" >态度</text><rect x="423" y="292" width="8" height="18" rx="4" fill="#167eaa"/><rect x="435" y="292" width="8" height="18" rx="4" fill="#c4dfed"/><rect x="447" y="292" width="8" height="18" rx="4" fill="#7eb6cf"/><text x="475" y="279" fill="#506e81" font-size="11" >行动</text><rect x="475" y="292" width="8" height="18" rx="4" fill="#c4dfed"/><rect x="487" y="292" width="8" height="18" rx="4" fill="#7eb6cf"/><rect x="499" y="292" width="8" height="18" rx="4" fill="#167eaa"/><text x="527" y="279" fill="#506e81" font-size="11" >社交</text><rect x="527" y="292" width="8" height="18" rx="4" fill="#7eb6cf"/><rect x="539" y="292" width="8" height="18" rx="4" fill="#167eaa"/><rect x="551" y="292" width="8" height="18" rx="4" fill="#c4dfed"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="400" gradientUnits="userSpaceOnUse"><stop stop-color="#fdf8f5"/><stop offset="1" stop-color="#f6eff0"/></linearGradient>
+    <radialGradient id="glowA" cx="600" cy="20" r="300" gradientUnits="userSpaceOnUse"><stop stop-color="#ffc9a8" stop-opacity=".5"/><stop offset="1" stop-color="#ffc9a8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowB" cx="20" cy="400" r="280" gradientUnits="userSpaceOnUse"><stop stop-color="#b5c3ff" stop-opacity=".35"/><stop offset="1" stop-color="#b5c3ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="tone" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7996b"/><stop offset="1" stop-color="#e8607a"/></linearGradient>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#10425f" fill-opacity=".1"/></pattern>
+    <radialGradient id="fade" cx="320" cy="200" r="340" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <mask id="dotMask"><rect width="640" height="400" fill="url(#fade)"/></mask>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dy="1" stdDeviation="1.2" flood-color="#0f3247" flood-opacity=".06"/><feDropShadow dy="16" stdDeviation="18" flood-color="#8f3f2a" flood-opacity=".14"/></filter>
+    <filter id="lift" x="-60%" y="-60%" width="220%" height="240%"><feDropShadow dy="6" stdDeviation="7" flood-color="#f7996b" flood-opacity=".45"/></filter>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)"/>
+  <rect width="640" height="400" fill="url(#glowA)"/>
+  <rect width="640" height="400" fill="url(#glowB)"/>
+  <rect width="640" height="400" fill="url(#dots)" mask="url(#dotMask)"/>
+  <g font-family="Inter,-apple-system,PingFang SC,Microsoft YaHei,sans-serif" stroke-linecap="round" stroke-linejoin="round">
+
+    <rect x="36" y="48" width="226" height="304" rx="24" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
+    <text x="58" y="82" fill="#8aa0b0" font-size="11" letter-spacing="1">你的日常选择</text>
+    <rect x="58" y="94" width="182" height="4" rx="2" fill="#f2e6e2"/><rect x="58" y="94" width="76" height="4" rx="2" fill="url(#tone)"/>
+    <text x="58" y="130" fill="#0b2233" font-size="15" font-weight="650">周末的下午，</text>
+    <text x="58" y="152" fill="#0b2233" font-size="15" font-weight="650">你更想……</text>
+    <rect x="56" y="172" width="186" height="44" rx="14" fill="#fff" stroke="#10425f" stroke-opacity=".1"/>
+    <circle cx="78" cy="194" r="7.5" stroke="#c9d4dc" stroke-width="1.5"/>
+    <text x="96" y="198.5" fill="#4c6779" font-size="13">约朋友出去玩</text>
+    <rect x="56" y="226" width="186" height="44" rx="14" fill="#ee7f5b" fill-opacity=".1" stroke="#ee7f5b" stroke-width="1.5"/>
+    <circle cx="78" cy="248" r="8" fill="url(#tone)"/><path d="m74 248 3 3 5-5.5" stroke="#fff" stroke-width="1.8"/>
+    <text x="96" y="252.5" fill="#0b2233" font-size="13" font-weight="600">把计划排得满满</text>
+    <rect x="56" y="280" width="186" height="44" rx="14" fill="#fff" stroke="#10425f" stroke-opacity=".1"/>
+    <circle cx="78" cy="302" r="7.5" stroke="#c9d4dc" stroke-width="1.5"/>
+    <text x="96" y="306.5" fill="#4c6779" font-size="13">看心情随便过</text>
+    <path d="M262 200c14 0 14 0 28 0" stroke="#ee7f5b" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="3 5"/>
+    <circle cx="290" cy="200" r="4" fill="#fff" stroke="#ee7f5b" stroke-width="1.6"/>
+    <rect x="290" y="24" width="314" height="352" rx="26" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
+    <text x="314" y="56" fill="#8aa0b0" font-size="11" letter-spacing="1">人格结果</text>
+    <rect x="536" y="42" width="46" height="20" rx="10" fill="#f6efee"/><text x="559" y="56" fill="#a07f76" font-size="10.5" text-anchor="middle">示意</text>
+    <rect x="314" y="74" width="72" height="72" rx="22" fill="url(#tone)" filter="url(#lift)"/>
+    <circle cx="340" cy="104" r="3.5" fill="#fff"/><circle cx="360" cy="104" r="3.5" fill="#fff"/>
+    <path d="M336 118q14 12 28 0" stroke="#fff" stroke-width="2.6"/>
+    <text x="404" y="108" fill="#0b2233" font-size="32" font-weight="750" letter-spacing="-1">CTRL</text>
+    <text x="405" y="134" fill="#d0623f" font-size="14" font-weight="600">拿捏者</text>
+    <text x="314" y="178" fill="#4c6779" font-size="11.5">匹配度</text>
+    <rect x="360" y="170" width="220" height="8" rx="4" fill="#f4e9e5"/><rect x="360" y="170" width="184" height="8" rx="4" fill="url(#tone)"/>
+    <path d="M314 198H580" stroke="#10425f" stroke-opacity=".07"/>
+    <text x="314" y="222" fill="#0b2233" font-size="12.5" font-weight="650">人格解读</text>
+    <rect x="314" y="234" width="262" height="6" rx="3" fill="#eef1f4"/><rect x="314" y="248" width="214" height="6" rx="3" fill="#eef1f4"/>
+    <text x="314" y="282" fill="#0b2233" font-size="12.5" font-weight="650">15 个维度</text>
+    <rect x="316" y="317.0" width="8" height="19.0" rx="4" fill="#ee7f5b" fill-opacity="0.62"/>
+    <rect x="328" y="305.6" width="8" height="30.4" rx="4" fill="#ee7f5b" fill-opacity="0.85"/>
+    <rect x="340" y="298.0" width="8" height="38.0" rx="4" fill="#ee7f5b" fill-opacity="1.00"/>
+    <text x="332" y="356" fill="#8aa0b0" font-size="10.5" text-anchor="middle">自我</text>
+    <rect x="370" y="305.6" width="8" height="30.4" rx="4" fill="#ee7f5b" fill-opacity="0.85"/>
+    <rect x="382" y="298.0" width="8" height="38.0" rx="4" fill="#ee7f5b" fill-opacity="1.00"/>
+    <rect x="394" y="320.8" width="8" height="15.2" rx="4" fill="#ee7f5b" fill-opacity="0.55"/>
+    <text x="386" y="356" fill="#8aa0b0" font-size="10.5" text-anchor="middle">情感</text>
+    <rect x="424" y="298.0" width="8" height="38.0" rx="4" fill="#ee7f5b" fill-opacity="1.00"/>
+    <rect x="436" y="318.9" width="8" height="17.1" rx="4" fill="#ee7f5b" fill-opacity="0.59"/>
+    <rect x="448" y="309.4" width="8" height="26.6" rx="4" fill="#ee7f5b" fill-opacity="0.77"/>
+    <text x="440" y="356" fill="#8aa0b0" font-size="10.5" text-anchor="middle">态度</text>
+    <rect x="478" y="320.8" width="8" height="15.2" rx="4" fill="#ee7f5b" fill-opacity="0.55"/>
+    <rect x="490" y="309.4" width="8" height="26.6" rx="4" fill="#ee7f5b" fill-opacity="0.77"/>
+    <rect x="502" y="299.9" width="8" height="36.1" rx="4" fill="#ee7f5b" fill-opacity="0.96"/>
+    <text x="494" y="356" fill="#8aa0b0" font-size="10.5" text-anchor="middle">行动</text>
+    <rect x="532" y="307.5" width="8" height="28.5" rx="4" fill="#ee7f5b" fill-opacity="0.81"/>
+    <rect x="544" y="298.0" width="8" height="38.0" rx="4" fill="#ee7f5b" fill-opacity="1.00"/>
+    <rect x="556" y="317.0" width="8" height="19.0" rx="4" fill="#ee7f5b" fill-opacity="0.62"/>
+    <text x="548" y="356" fill="#8aa0b0" font-size="10.5" text-anchor="middle">社交</text>
+  </g>
+</svg>

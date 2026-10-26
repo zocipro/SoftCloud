@@ -1,39 +1,90 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
   <defs>
-    <radialGradient id="bg"><stop stop-color="#dceff9"/><stop offset="1" stop-color="#f1f7fc"/></radialGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dy="9" stdDeviation="12" flood-color="#477d9b" flood-opacity=".12"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="400" gradientUnits="userSpaceOnUse"><stop stop-color="#f4fafd"/><stop offset="1" stop-color="#eaf3fa"/></linearGradient>
+    <radialGradient id="glowA" cx="560" cy="40" r="300" gradientUnits="userSpaceOnUse"><stop stop-color="#8fd0f4" stop-opacity=".55"/><stop offset="1" stop-color="#8fd0f4" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowB" cx="40" cy="400" r="280" gradientUnits="userSpaceOnUse"><stop stop-color="#7fe2d3" stop-opacity=".4"/><stop offset="1" stop-color="#7fe2d3" stop-opacity="0"/></radialGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#10b2a1"/><stop offset=".5" stop-color="#1a93c4"/><stop offset="1" stop-color="#3a72d6"/></linearGradient>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#10425f" fill-opacity=".1"/></pattern>
+    <radialGradient id="fade" cx="320" cy="200" r="340" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <mask id="dotMask"><rect width="640" height="400" fill="url(#fade)"/></mask>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dy="1" stdDeviation="1.2" flood-color="#0f3247" flood-opacity=".06"/><feDropShadow dy="16" stdDeviation="18" flood-color="#14506f" flood-opacity=".13"/></filter>
+    <filter id="lift" x="-30%" y="-40%" width="160%" height="190%"><feDropShadow dy="8" stdDeviation="10" flood-color="#1a93c4" flood-opacity=".28"/></filter>
   </defs>
   <rect width="640" height="400" fill="url(#bg)"/>
-  <g font-family="Inter,Arial,PingFang SC,Microsoft YaHei,sans-serif" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="38" y="44" width="354" height="310" rx="20" fill="#fff" stroke="#d2e5f0" filter="url(#shadow)"/>
-    <text x="62" y="78" fill="#25465d" font-size="16" font-weight="600">搜索押韵</text>
-    <rect x="62" y="97" width="306" height="46" rx="10" fill="#f1f7fc" stroke="#d2e5f0"/>
-    <circle cx="83" cy="117" r="6" stroke="#167eaa" stroke-width="2"/>
-    <path d="m88 122 5 5" stroke="#167eaa" stroke-width="2"/>
-    <text x="109" y="126" fill="#25465d" font-size="16">香肠</text>
-    <rect x="130.5" y="159" width="65" height="28" rx="7" fill="#167eaa"/>
-    <text x="94.5" y="178" fill="#506e81" font-size="12" text-anchor="middle">单押</text>
-    <text x="163" y="178" fill="#fff" font-size="12" text-anchor="middle">双押</text>
-    <text x="231" y="178" fill="#506e81" font-size="12" text-anchor="middle">多押</text>
-    <text x="62" y="216" fill="#506e81" font-size="11">灵感词语 · 示例</text>
-    <g fill="#f1f7fc" stroke="#d2e5f0">
-      <rect x="62" y="231" width="94" height="55" rx="10"/>
-      <rect x="168" y="231" width="94" height="55" rx="10"/>
-      <rect x="274" y="231" width="94" height="55" rx="10"/>
+  <rect width="640" height="400" fill="url(#glowA)"/>
+  <rect width="640" height="400" fill="url(#glowB)"/>
+  <rect width="640" height="400" fill="url(#dots)" mask="url(#dotMask)"/>
+
+  <g font-family="Inter,-apple-system,PingFang SC,Microsoft YaHei,sans-serif" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Search panel -->
+    <rect x="36" y="34" width="372" height="332" rx="24" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
+    <text x="60" y="72" fill="#0b2233" font-size="17" font-weight="650">押韵搜索</text>
+    <rect x="232" y="54" width="152" height="28" rx="14" fill="#eef5f9"/>
+    <rect x="283" y="57" width="50" height="22" rx="11" fill="url(#brand)" filter="url(#lift)"/>
+    <text x="258" y="72.5" fill="#4c6779" font-size="12" text-anchor="middle">单押</text>
+    <text x="308" y="72.5" fill="#fff" font-size="12" font-weight="600" text-anchor="middle">双押</text>
+    <text x="358" y="72.5" fill="#4c6779" font-size="12" text-anchor="middle">多押</text>
+
+    <rect x="60" y="96" width="324" height="52" rx="16" fill="#f5f9fc" stroke="#1a93c4" stroke-opacity=".55" stroke-width="1.5"/>
+    <circle cx="86" cy="120" r="7" stroke="#1a93c4" stroke-width="2"/>
+    <path d="m91.5 125.5 5 5" stroke="#1a93c4" stroke-width="2"/>
+    <text x="110" y="128" fill="#0b2233" font-size="19" font-weight="600">香肠</text>
+    <path d="M159 110v20" stroke="#1a93c4" stroke-width="1.6"/>
+    <text x="364" y="127" fill="#8aa0b0" font-size="12" font-family="JetBrains Mono,SF Mono,Menlo,monospace" text-anchor="end">xiāng cháng</text>
+
+    <text x="60" y="176" fill="#8aa0b0" font-size="11" letter-spacing="1">韵母 ANG · ANG  —  示例结果</text>
+
+    <!-- Result rows -->
+    <g>
+      <rect x="60" y="188" width="324" height="50" rx="14" fill="#eef7fb"/>
+      <text x="80" y="219" fill="#0b2233" font-size="18" font-weight="650">光芒</text>
+      <text x="132" y="218" fill="#4c6779" font-size="12" font-family="JetBrains Mono,SF Mono,Menlo,monospace">guāng máng</text>
+      <rect x="300" y="202" width="68" height="22" rx="11" fill="#1a93c4" fill-opacity=".14"/>
+      <circle cx="313" cy="213" r="3.5" fill="#1a93c4"/><circle cx="324" cy="213" r="3.5" fill="#1a93c4"/>
+      <text x="333" y="217" fill="#1677a3" font-size="11" font-weight="600">双押</text>
     </g>
-    <g fill="#167eaa" font-size="18" text-anchor="middle">
-      <text x="109" y="265">光芒</text><text x="215" y="265">猖狂</text><text x="321" y="265">枪膛</text>
+    <g>
+      <rect x="60" y="244" width="324" height="50" rx="14" fill="#fff" stroke="#10425f" stroke-opacity=".08"/>
+      <text x="80" y="275" fill="#0b2233" font-size="18" font-weight="650">猖狂</text>
+      <text x="132" y="274" fill="#4c6779" font-size="12" font-family="JetBrains Mono,SF Mono,Menlo,monospace">chāng kuáng</text>
+      <rect x="300" y="258" width="68" height="22" rx="11" fill="#1a93c4" fill-opacity=".1"/>
+      <circle cx="313" cy="269" r="3.5" fill="#1a93c4"/><circle cx="324" cy="269" r="3.5" fill="#1a93c4"/>
+      <text x="333" y="273" fill="#1677a3" font-size="11" font-weight="600">双押</text>
     </g>
-    <text x="62" y="326" fill="#506e81" font-size="12">找到词语，继续探索彼此的关联</text>
-    <path d="M397 199h34m-8-8 8 8-8 8" stroke="#8db9ce" stroke-width="2"/>
-    <rect x="448" y="84" width="154" height="230" rx="18" fill="#fff" stroke="#d2e5f0" filter="url(#shadow)"/>
-    <circle cx="525" cy="128" r="23" fill="#e5f2f9"/>
-    <rect x="519" y="114" width="12" height="20" rx="6" stroke="#167eaa" stroke-width="2"/>
-    <path d="M514 129v3a11 11 0 0 0 22 0v-3m-11 14v7m-7 0h14" stroke="#167eaa" stroke-width="2"/>
-    <text x="525" y="178" fill="#25465d" font-size="16" font-weight="600" text-anchor="middle">一起共创</text>
-    <text x="525" y="206" fill="#506e81" font-size="12" text-anchor="middle">分享押韵搭配</text>
-    <text x="525" y="229" fill="#506e81" font-size="12" text-anchor="middle">核对韵母与声调</text>
-    <rect x="467" y="254" width="116" height="34" rx="8" fill="#e5f2f9"/>
-    <text x="525" y="276" fill="#167eaa" font-size="12" text-anchor="middle">登录后投稿</text>
+    <g>
+      <rect x="60" y="300" width="324" height="50" rx="14" fill="#fff" stroke="#10425f" stroke-opacity=".08"/>
+      <text x="80" y="331" fill="#0b2233" font-size="18" font-weight="650">枪膛</text>
+      <text x="132" y="330" fill="#4c6779" font-size="12" font-family="JetBrains Mono,SF Mono,Menlo,monospace">qiāng táng</text>
+      <rect x="300" y="314" width="68" height="22" rx="11" fill="#1a93c4" fill-opacity=".1"/>
+      <circle cx="313" cy="325" r="3.5" fill="#1a93c4"/><circle cx="324" cy="325" r="3.5" fill="#1a93c4"/>
+      <text x="333" y="329" fill="#1677a3" font-size="11" font-weight="600">双押</text>
+    </g>
+
+    <!-- Connector -->
+    <path d="M408 210c18 0 18-46 36-46" stroke="#1a93c4" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="3 5"/>
+    <circle cx="444" cy="164" r="4" fill="#fff" stroke="#1a93c4" stroke-width="1.6"/>
+
+    <!-- Co-creation card -->
+    <rect x="432" y="60" width="176" height="236" rx="22" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
+    <rect x="452" y="80" width="40" height="40" rx="13" fill="url(#brand)"/>
+    <rect x="466" y="88" width="12" height="18" rx="6" stroke="#fff" stroke-width="2"/>
+    <path d="M461 101a11 11 0 0 0 22 0M472 112v3" stroke="#fff" stroke-width="2"/>
+    <text x="452" y="146" fill="#0b2233" font-size="16" font-weight="650">一起共创</text>
+    <text x="452" y="166" fill="#4c6779" font-size="11.5">分享你的押韵搭配</text>
+
+    <rect x="452" y="182" width="136" height="40" rx="12" fill="#f5f9fc" stroke="#10425f" stroke-opacity=".08"/>
+    <text x="466" y="207" fill="#0b2233" font-size="14" font-weight="600">香肠</text>
+    <text x="503" y="207" fill="#1a93c4" font-size="13" font-weight="600">×</text>
+    <text x="520" y="207" fill="#0b2233" font-size="14" font-weight="600">光芒</text>
+    <path d="M572 197l4 4 7-8" stroke="#10a89a" stroke-width="2"/>
+
+    <rect x="452" y="240" width="136" height="36" rx="18" fill="#0b2233"/>
+    <text x="520" y="262.5" fill="#fff" font-size="12.5" font-weight="600" text-anchor="middle">登录后投稿 →</text>
+
+    <!-- Floating check chip -->
+    <rect x="452" y="318" width="156" height="34" rx="17" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
+    <circle cx="472" cy="335" r="9" fill="#10a89a" fill-opacity=".14"/>
+    <path d="m467.5 335 3 3 6-6.5" stroke="#10a89a" stroke-width="1.8"/>
+    <text x="488" y="339.5" fill="#0b2233" font-size="12" font-weight="550">逐字核对韵母声调</text>
   </g>
 </svg>
