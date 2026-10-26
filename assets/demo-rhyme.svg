@@ -61,30 +61,34 @@
     </g>
 
     <!-- Connector -->
-    <path d="M408 210c18 0 18-46 36-46" stroke="#1a93c4" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="3 5"/>
-    <circle cx="444" cy="164" r="4" fill="#fff" stroke="#1a93c4" stroke-width="1.6"/>
+    <path d="M408 200h24" stroke="#1a93c4" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="3 5"/>
 
-    <!-- Co-creation card -->
-    <rect x="432" y="60" width="176" height="236" rx="22" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
-    <rect x="452" y="80" width="40" height="40" rx="13" fill="url(#brand)"/>
-    <rect x="466" y="88" width="12" height="18" rx="6" stroke="#fff" stroke-width="2"/>
-    <path d="M461 101a11 11 0 0 0 22 0M472 112v3" stroke="#fff" stroke-width="2"/>
-    <text x="452" y="146" fill="#0b2233" font-size="16" font-weight="650">一起共创</text>
-    <text x="452" y="166" fill="#4c6779" font-size="11.5">分享你的押韵搭配</text>
+    <!-- Co-creation card: spans the same height as the search panel together with the chip below -->
+    <rect x="432" y="34" width="176" height="284" rx="24" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
+    <rect x="452" y="54" width="40" height="40" rx="13" fill="url(#brand)"/>
+    <rect x="466" y="62" width="12" height="18" rx="6" stroke="#fff" stroke-width="2"/>
+    <path d="M461 75a11 11 0 0 0 22 0M472 86v3" stroke="#fff" stroke-width="2"/>
+    <text x="452" y="122" fill="#0b2233" font-size="16" font-weight="650">一起共创</text>
+    <text x="452" y="142" fill="#4c6779" font-size="11.5">分享你的押韵搭配</text>
 
-    <rect x="452" y="182" width="136" height="40" rx="12" fill="#f5f9fc" stroke="#10425f" stroke-opacity=".08"/>
-    <text x="466" y="207" fill="#0b2233" font-size="14" font-weight="600">香肠</text>
-    <text x="503" y="207" fill="#1a93c4" font-size="13" font-weight="600">×</text>
-    <text x="520" y="207" fill="#0b2233" font-size="14" font-weight="600">光芒</text>
-    <path d="M572 197l4 4 7-8" stroke="#10a89a" stroke-width="2"/>
+    <rect x="452" y="158" width="136" height="40" rx="12" fill="#f5f9fc" stroke="#10425f" stroke-opacity=".08"/>
+    <text x="466" y="183" fill="#0b2233" font-size="14" font-weight="600">香肠</text>
+    <text x="503" y="183" fill="#1a93c4" font-size="13" font-weight="600">×</text>
+    <text x="520" y="183" fill="#0b2233" font-size="14" font-weight="600">光芒</text>
+    <path d="M572 173l4 4 7-8" stroke="#10a89a" stroke-width="2"/>
 
-    <rect x="452" y="240" width="136" height="36" rx="18" fill="#0b2233"/>
-    <text x="520" y="262.5" fill="#fff" font-size="12.5" font-weight="600" text-anchor="middle">登录后投稿 →</text>
+    <circle cx="463" cy="226" r="11" fill="url(#brand)"/>
+    <text x="463" y="230" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">你</text>
+    <text x="482" y="223" fill="#0b2233" font-size="11.5" font-weight="600">首次提交者</text>
+    <text x="482" y="238" fill="#8aa0b0" font-size="10.5">记录这组搭配的作者</text>
 
-    <!-- Floating check chip -->
-    <rect x="452" y="318" width="156" height="34" rx="17" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
-    <circle cx="472" cy="335" r="9" fill="#10a89a" fill-opacity=".14"/>
-    <path d="m467.5 335 3 3 6-6.5" stroke="#10a89a" stroke-width="1.8"/>
-    <text x="488" y="339.5" fill="#0b2233" font-size="12" font-weight="550">逐字核对韵母声调</text>
+    <rect x="452" y="262" width="136" height="36" rx="18" fill="#0b2233"/>
+    <text x="520" y="284.5" fill="#fff" font-size="12.5" font-weight="600" text-anchor="middle">登录后投稿 →</text>
+
+    <!-- Check chip: same width as the card, bottom aligned with the search panel, content centred -->
+    <rect x="432" y="330" width="176" height="36" rx="18" fill="#fff" stroke="#10425f" stroke-opacity=".08" filter="url(#shadow)"/>
+    <circle cx="468" cy="348" r="9" fill="#10a89a" fill-opacity=".14"/>
+    <path d="m463.5 348 3 3 6-6.5" stroke="#10a89a" stroke-width="1.8"/>
+    <text x="485" y="352.5" fill="#0b2233" font-size="12" font-weight="550">逐字核对韵母声调</text>
   </g>
 </svg>
