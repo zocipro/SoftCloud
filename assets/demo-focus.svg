@@ -7,8 +7,8 @@
     <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#10425f" fill-opacity=".1"/></pattern>
     <radialGradient id="fade" cx="320" cy="200" r="340" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
     <mask id="dotMask"><rect width="640" height="400" fill="url(#fade)"/></mask>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dy="1" stdDeviation="1.2" flood-color="#0f3247" flood-opacity=".06"/><feDropShadow dy="16" stdDeviation="18" flood-color="#2a3a8f" flood-opacity=".14"/></filter>
-    <filter id="lift" x="-60%" y="-60%" width="220%" height="240%"><feDropShadow dy="6" stdDeviation="7" flood-color="#7a86f0" flood-opacity=".45"/></filter>
+    <filter id="shadow" filterUnits="userSpaceOnUse" x="-100" y="-100" width="840" height="600"><feDropShadow dy="1" stdDeviation="1.2" flood-color="#0f3247" flood-opacity=".06"/><feDropShadow dy="16" stdDeviation="18" flood-color="#2a3a8f" flood-opacity=".14"/></filter>
+    <filter id="lift" filterUnits="userSpaceOnUse" x="-100" y="-100" width="840" height="600"><feDropShadow dy="6" stdDeviation="7" flood-color="#7a86f0" flood-opacity=".45"/></filter>
   </defs>
   <rect width="640" height="400" fill="url(#bg)"/>
   <rect width="640" height="400" fill="url(#glowA)"/>
