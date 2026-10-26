@@ -11,8 +11,8 @@ export function createSculpture(setState) {
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     renderer.setClearColor(0x000000, 0);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    renderer.toneMapping = THREE.NeutralToneMapping;
+    renderer.toneMappingExposure = 0.95;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 40);
     camera.position.set(0, 0, 9.2);
@@ -48,13 +48,28 @@ export function createSculpture(setState) {
 
     const sculpture = new THREE.Group();
     const material = new THREE.MeshPhysicalMaterial({
-        color: 0x258daf, metalness: 0.22, roughness: 0.26,
-        clearcoat: 1, clearcoatRoughness: 0.14, envMapIntensity: 0.85,
+        color: 0xffffff, vertexColors: true, metalness: 0.12, roughness: 0.3,
+        clearcoat: 1, clearcoatRoughness: 0.16, envMapIntensity: 0.5,
     });
     const overlayMaterial = new THREE.MeshPhysicalMaterial({
         color: 0xf8fcff, metalness: 0.04, roughness: 0.2,
         clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 1,
     });
+    // The body carries the original mark's teal crown, ocean base and cyan flank.
+    const palette = { ocean: new THREE.Color(0x1d74a8), teal: new THREE.Color(0x0fae9e), cyan: new THREE.Color(0x2fa9d2) };
+    function paintGradient(geometry) {
+        const position = geometry.attributes.position;
+        const colors = new Float32Array(position.count * 3);
+        const color = new THREE.Color();
+        for (let i = 0; i < position.count; i++) {
+            const x = position.getX(i), y = position.getY(i);
+            const flank = THREE.MathUtils.clamp((x + 0.3) / 2.2, 0, 1) * THREE.MathUtils.clamp((0.5 - y) / 1.5, 0, 1);
+            const crown = THREE.MathUtils.smoothstep(y - 0.18 * x, -0.7, 1.0);
+            color.copy(palette.ocean).lerp(palette.cyan, flank).lerp(palette.teal, crown);
+            color.toArray(colors, i * 3);
+        }
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    }
     // Both contours are traced from ruanyun.png, including its distinctive white overlay.
     function extrudeLogo(points, depth, bevel, surface, z) {
         const curve = new THREE.CatmullRomCurve3(points.map(([x, y]) => new THREE.Vector3(x, y, 0)), true, 'centripetal');
@@ -63,12 +78,34 @@ export function createSculpture(setState) {
             depth, steps: 1, bevelEnabled: true, bevelThickness: bevel,
             bevelSize: bevel * 0.65, bevelSegments: 6,
         });
+        if (surface.vertexColors) paintGradient(geometry);
         const mesh = new THREE.Mesh(geometry, surface);
         mesh.position.z = z;
         return mesh;
     }
     sculpture.add(extrudeLogo(logoContours.body, 0.42, 0.10, material, -0.25));
     sculpture.add(extrudeLogo(logoContours.overlay, 0.12, 0.065, overlayMaterial, 0.22));
+    // A soft pool of light under the cloud, echoing the shadow in the original artwork.
+    function createShadowTexture() {
+        const size = 256;
+        const paint = document.createElement('canvas');
+        paint.width = paint.height = size;
+        const context = paint.getContext('2d');
+        const gradient = context.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+        gradient.addColorStop(0, 'rgba(255,255,255,1)');
+        gradient.addColorStop(0.45, 'rgba(255,255,255,.45)');
+        gradient.addColorStop(1, 'rgba(255,255,255,0)');
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, size, size);
+        const texture = new THREE.CanvasTexture(paint);
+        texture.colorSpace = THREE.SRGBColorSpace;
+        return texture;
+    }
+    const shadowMaterial = new THREE.MeshBasicMaterial({ map: createShadowTexture(), color: 0x3ea7d6, transparent: true, opacity: 0.42, depthWrite: false });
+    const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), shadowMaterial);
+    shadow.position.set(0, -1.95, -0.6);
+    shadow.scale.set(4.2, 0.42, 1);
+    scene.add(shadow);
     const motion = createLogoMotion(reducedMotion.matches);
     scene.add(sculpture);
     scene.add(new THREE.HemisphereLight(0xf2faff, 0x517d9a, 1.5));
@@ -76,6 +113,7 @@ export function createSculpture(setState) {
     key.position.set(-3, 4, 5);
     scene.add(key);
 
+    let shadowBase = 0.42;
     let frame = 0;
     let revealFrame = 0;
     let lastTime = 0;
@@ -100,6 +138,10 @@ export function createSculpture(setState) {
         const pose = motion.sample();
         sculpture.rotation.set(pose.x, pose.y, pose.z, 'YXZ');
         sculpture.position.set(pose.floatX, pose.floatY, 0);
+        const lift = THREE.MathUtils.clamp(pose.floatY * 4, -1, 1);
+        shadow.position.x = pose.floatX * 0.8;
+        shadow.scale.set(4.2 * (1 - lift * 0.08), 0.42 * (1 - lift * 0.08), 1);
+        shadowMaterial.opacity = shadowBase * (1 - lift * 0.25);
         try { renderer.render(scene, camera); } catch (error) { failScene(error); return; }
         if (!revealed && !revealFrame) {
             // Reveal only after a real frame has been drawn; the original image is error-only.
@@ -203,7 +245,11 @@ export function createSculpture(setState) {
     reducedMotion.addEventListener('change', () => motion.setReduced(reducedMotion.matches));
     const syncTheme = () => {
         const light = document.documentElement.dataset.theme === 'light';
-        material.color.set(light ? 0x258daf : 0x41aacf);
+        material.emissive.set(light ? 0x000000 : 0x0b3a4c);
+        material.emissiveIntensity = light ? 0 : 0.55;
+        shadowMaterial.color.set(light ? 0x3ea7d6 : 0x3fd0e8);
+        shadowBase = light ? 0.42 : 0.3;
+        shadowMaterial.opacity = shadowBase;
         render();
     };
     new MutationObserver(syncTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

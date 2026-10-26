@@ -3,136 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="软云网络，把 AI 的无限可能，做成触手可及的日常。探索押韵共创、软云单词、软云专注与 SBTI 人格测试。">
-    <meta name="keywords" content="软云网络, AI, 人工智能, 押韵共创, 押韵搜索, 软云单词, 软云专注, SBTI人格测试">
+    <meta name="description" content="软云网络，把 AI 的无限可能，做成触手可及的日常。探索押韵共创、软云单词、软云专注与 SBTI 人格测试，以及 5 个打开即用的站内工具。">
+    <meta name="keywords" content="软云网络, AI, 人工智能, 押韵共创, 押韵搜索, 软云单词, 软云专注, SBTI人格测试, 在线工具">
     <meta name="author" content="软云网络">
+    <meta name="theme-color" content="#f4f8fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#06121c" media="(prefers-color-scheme: dark)">
     <meta property="og:title" content="软云网络 · 让想象，成为日常">
     <meta property="og:description" content="全面拥抱 AI 的探索者团队。把前沿技术，做成简单好用的日常产品。">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://zoci.pro/assets/brand-icon.png">
     <title>软云网络 · 让想象，成为日常</title>
     <link rel="icon" type="image/png" href="assets/brand-icon.png">
     <link rel="apple-touch-icon" href="assets/brand-icon.png">
-    <link rel="stylesheet" href="styles.css?v=19">
-    <link rel="modulepreload" href="scene.js?v=17">
-    <noscript><style>.scene-loader { display: none !important; } .hero-visual .scene-fallback { opacity: 1; visibility: visible; }</style></noscript>
+    <link rel="stylesheet" href="styles.css?v=20">
+    <link rel="modulepreload" href="scene.js?v=18">
+    <noscript><style>.scene-loader { display: none !important; } .hero-visual .scene-fallback { opacity: 1; visibility: visible; } .reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
     <script>try { const theme = localStorage.getItem('softcloud-theme-blue'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch (e) {}</script>
 </head>
 <body>
     <a class="skip-link" href="#project">跳转到产品</a>
     <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
-        <symbol id="arrow-up" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
-        <symbol id="asterisk" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07 19.07 4.93" stroke-width="2.2" stroke-linecap="butt"/></symbol>
+        <symbol id="arrow-up" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
         <symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+        <symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6"/></symbol>
+        <symbol id="asterisk" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07 19.07 4.93" stroke-width="2.2" stroke-linecap="butt"/></symbol>
+        <symbol id="sparkle" viewBox="0 0 24 24"><path d="M12 3c.6 4.6 3.4 7.4 8 8-4.6.6-7.4 3.4-8 8-.6-4.6-3.4-7.4-8-8 4.6-.6 7.4-3.4 8-8Z" fill="currentColor" stroke="none"/></symbol>
         <symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
         <symbol id="moon" viewBox="0 0 24 24"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></symbol>
+        <symbol id="menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+        <symbol id="close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+        <symbol id="icon-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+        <symbol id="icon-key" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M7 10h.01M11 10h.01M15 10h.01M8 14h8"/></symbol>
+        <symbol id="icon-wave" viewBox="0 0 24 24"><path d="M3 12h2m3-5v10m4-13v16m4-11v6m3-3h2"/></symbol>
+        <symbol id="icon-spark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 10h.01M15 10h.01M8.5 14.5c1.9 2 5.1 2 7 0"/></symbol>
     </defs></svg>
+
     <header class="navbar" id="navbar">
-        <div class="container nav-inner">
-            <a class="brand" href="#top" aria-label="软云网络，返回顶部"><img src="assets/brand-icon.png" width="34" height="34" alt=""><span>softcloud<span class="brand-period">.</span></span><span class="brand-cn">软云网络</span></a>
-            <nav class="nav-links" aria-label="主导航"><a href="#project">探索产品 <span>04</span></a><a href="#tools">常用工具 <span>05</span></a><a href="#about">关于我们</a></nav>
-            <div class="nav-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换为深色主题"><svg class="icon-sun"><use href="#sun"/></svg><svg class="icon-moon"><use href="#moon"/></svg></button><a class="nav-cta" href="#project">即刻探索 <svg><use href="#arrow-up"/></svg></a></div>
+        <div class="nav-shell">
+            <a class="brand" href="#top" aria-label="软云网络，返回顶部"><img src="assets/brand-icon.png" width="30" height="30" alt=""><span class="brand-word">softcloud<span class="brand-period">.</span></span></a>
+            <nav class="nav-links" id="nav-links" aria-label="主导航">
+                <a href="#project">产品 <span>04</span></a>
+                <a href="#tools">工具 <span>05</span></a>
+                <a href="#about">关于</a>
+            </nav>
+            <div class="nav-tools">
+                <button class="icon-button" id="theme-toggle" type="button" aria-label="切换为深色主题"><svg class="icon-sun"><use href="#sun"/></svg><svg class="icon-moon"><use href="#moon"/></svg></button>
+                <a class="nav-cta" href="#project">即刻探索 <svg><use href="#arrow-up"/></svg></a>
+                <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="打开导航"><svg class="icon-menu"><use href="#menu"/></svg><svg class="icon-close"><use href="#close"/></svg></button>
+            </div>
         </div>
     </header>
+
     <main id="top">
-        <section class="hero container" aria-labelledby="hero-title">
-            <div class="hero-copy">
-                <p class="eyebrow"><span class="status-dot"></span> INDEPENDENT MINDS. INFINITE POSSIBILITIES.</p>
-                <h1 id="hero-title">让想象，<br><span>成为日常。</span></h1>
-                <p class="hero-description">我们是软云网络，一群拥抱 AI 的探索者。<br>把前沿技术的无限可能，做成简单好用的日常。</p>
-                <div class="hero-actions"><a class="button-primary" href="#project">探索我们的产品 <svg><use href="#arrow-up"/></svg></a><a class="text-link" href="#about">认识软云 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a></div>
-                <div class="hero-footnote"><span class="tiny-cross">+</span><span>好奇心驱动 · 为每个人创造</span></div>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-sky" aria-hidden="true">
+                <span class="sky-blob sky-blob-a"></span>
+                <span class="sky-blob sky-blob-b"></span>
+                <span class="sky-blob sky-blob-c"></span>
+                <span class="sky-grid"></span>
+                <span class="sky-grain"></span>
             </div>
-            <div class="hero-visual" id="hero-visual" data-scene-state="loading" aria-busy="true">
-                <div class="scene-halo" aria-hidden="true"></div>
-                <div class="scene-loader" role="status" aria-live="polite"><span class="loader-orbit" aria-hidden="true"><span></span></span><span class="loader-caption">正在加载<span aria-hidden="true">…</span></span></div>
-                <div class="scene-fallback" id="scene-fallback" aria-hidden="true"><img src="assets/brand-icon.png" width="180" height="180" alt=""></div>
-                <canvas id="sculpture" role="img" aria-label="可旋转的软云 3D Logo" aria-describedby="rotation-help" tabindex="-1"></canvas>
-                <div id="rotation-surface" class="scene-interaction" aria-hidden="true"></div>
-                <span id="rotation-help" class="sr-only">按住模型区域可上下左右拖动，松手后逐渐减速；在周围区域滑动可滚动页面。Logo 持续在正面范围内自动转动。聚焦后可用方向键调整，Home 键恢复默认方向。</span>
-                <div class="scene-topline" aria-hidden="true"><span>SC — THE ORIGINAL MARK</span><svg aria-hidden="true" focusable="false"><use href="#asterisk"/></svg></div>
-                <div class="scene-label" aria-hidden="true"><span class="status-dot"></span> SOFTCLOUD / ORIGINAL</div>
-                <div class="scene-bottomline"><span class="rotation-hint" aria-hidden="true"><span class="drag-desktop">拖动探索 · 松手缓停</span><span class="drag-touch">按住全向拖动</span></span></div>
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <a class="release-pill hero-rise" href="#project"><span class="pill-badge">2.0</span><span>软云全新面貌 · 产品与工具一站直达</span><svg aria-hidden="true" focusable="false"><use href="#arrow-right"/></svg></a>
+                    <h1 id="hero-title" class="hero-rise"><span class="title-line">让想象，</span><span class="title-line gradient-text">成为日常。</span></h1>
+                    <p class="hero-description hero-rise">我们是软云网络，一群拥抱 AI 的探索者。<br>把前沿技术的无限可能，做成简单好用的日常。</p>
+                    <div class="hero-actions hero-rise">
+                        <a class="button-primary" href="#project"><span>探索我们的产品</span><span class="button-orb"><svg aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span></a>
+                        <a class="button-ghost" href="#tools">打开常用工具</a>
+                    </div>
+                    <dl class="hero-stats hero-rise">
+                        <div><dt>上线产品</dt><dd>04</dd></div>
+                        <div><dt>站内工具</dt><dd>05</dd></div>
+                        <div><dt>打开即用</dt><dd>0<small>门槛</small></dd></div>
+                    </dl>
+                </div>
+                <div class="hero-visual" id="hero-visual" data-scene-state="loading" aria-busy="true">
+                    <div class="scene-orbits" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <div class="scene-halo" aria-hidden="true"></div>
+                    <div class="scene-loader" role="status" aria-live="polite"><span class="loader-orbit" aria-hidden="true"><span></span></span><span class="loader-caption">正在加载<span aria-hidden="true">…</span></span></div>
+                    <div class="scene-fallback" id="scene-fallback" aria-hidden="true"><img src="assets/brand-icon.png" width="180" height="180" alt=""></div>
+                    <canvas id="sculpture" role="img" aria-label="可旋转的软云 3D Logo" aria-describedby="rotation-help" tabindex="-1"></canvas>
+                    <div id="rotation-surface" class="scene-interaction" aria-hidden="true"></div>
+                    <span id="rotation-help" class="sr-only">按住模型区域可上下左右拖动，松手后逐渐减速；在周围区域滑动可滚动页面。Logo 持续在正面范围内自动转动。聚焦后可用方向键调整，Home 键恢复默认方向。</span>
+                    <div class="satellites" aria-hidden="true">
+                        <span class="satellite sat-rhyme"><svg><use href="#icon-mic"/></svg>押韵共创</span>
+                        <span class="satellite sat-words"><svg><use href="#icon-key"/></svg>软云单词</span>
+                        <span class="satellite sat-focus"><svg><use href="#icon-wave"/></svg>软云专注</span>
+                        <span class="satellite sat-sbti"><svg><use href="#icon-spark"/></svg>SBTI</span>
+                    </div>
+                    <div class="scene-caption" aria-hidden="true"><span class="status-dot"></span><span class="rotation-hint"><span class="drag-desktop">拖动云朵 · 松手缓停</span><span class="drag-touch">按住云朵全向拖动</span></span></div>
+                </div>
             </div>
-            <div class="hero-bottom"><p><span class="status-dot"></span> 4 款产品 · 从学习到创作，自由探索</p><a href="#project">向下发现 <span>↓</span></a></div>
+            <a class="scroll-cue" href="#project" aria-label="向下浏览产品"><span>向下发现</span><svg aria-hidden="true" focusable="false"><use href="#arrow-down"/></svg></a>
         </section>
+
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>押韵共创</span><svg><use href="#sparkle"/></svg><span>软云单词</span><svg><use href="#sparkle"/></svg><span>软云专注</span><svg><use href="#sparkle"/></svg><span>SBTI 人格测试</span><svg><use href="#sparkle"/></svg><span>编码工具箱</span><svg><use href="#sparkle"/></svg><span>批量图片处理</span><svg><use href="#sparkle"/></svg><span>软云排版</span><svg><use href="#sparkle"/></svg><span>人生清单</span><svg><use href="#sparkle"/></svg>
+                <span>押韵共创</span><svg><use href="#sparkle"/></svg><span>软云单词</span><svg><use href="#sparkle"/></svg><span>软云专注</span><svg><use href="#sparkle"/></svg><span>SBTI 人格测试</span><svg><use href="#sparkle"/></svg><span>编码工具箱</span><svg><use href="#sparkle"/></svg><span>批量图片处理</span><svg><use href="#sparkle"/></svg><span>软云排版</span><svg><use href="#sparkle"/></svg><span>人生清单</span><svg><use href="#sparkle"/></svg>
+            </div>
+        </div>
+
         <section class="projects section container" id="project" aria-labelledby="projects-title">
             <div class="section-heading reveal">
-                <div><p class="eyebrow">01 / 我们的产品</p><h2 id="projects-title">学习，探索，<span>关注新的可能。</span></h2></div>
+                <div>
+                    <p class="eyebrow"><span class="eyebrow-index">01</span> 我们的产品</p>
+                    <h2 id="projects-title">学习，创作，<span class="gradient-text">遇见新的可能。</span></h2>
+                </div>
                 <p>选一个你现在用得上的，<br>看看它具体能帮你做什么。</p>
             </div>
-            <div class="product-grid">
-                <article class="product-card reveal">
-                    <div class="product-body">
-                        <p class="product-meta"><span class="product-index">01</span> 押韵共创 <span class="product-category">说唱与词库</span></p>
-                        <h3>找到合拍的词，把灵感接成韵</h3>
+            <div class="bento">
+                <article class="product-card tone-rhyme is-featured reveal">
+                    <div class="product-head"><span class="product-index">01</span><span class="product-tag">说唱与词库</span><span class="product-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></div>
+                    <div class="product-copy">
+                        <h3><span class="product-name">押韵共创</span>找到合拍的词，把灵感接成韵</h3>
                         <p class="product-description">搜索单押、双押与多押词汇，逐字核对韵母和声调；也能分享自己的押韵搭配，一起共建说唱词库。</p>
-                        <ul class="product-features"><li>搜索押韵词，查看词组之间的关联</li><li>登录投稿，记录每组押韵的首次提交者</li></ul>
-                        <a class="product-cta" href="https://ya.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="探索押韵共创（新窗口打开）">探索押韵共创 <svg><use href="#arrow-up"/></svg></a>
-                        <span class="product-domain">ya.zoci.pro · 可匿名浏览，登录后投稿</span>
+                        <ul class="product-features"><li>押韵搜索与词组互查</li><li>登录投稿，记录首次提交者</li><li>可匿名浏览</li></ul>
+                        <a class="product-cta" href="https://ya.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="探索押韵共创（新窗口打开）">探索押韵共创 <svg aria-hidden="true" focusable="false"><use href="#arrow-right"/></svg></a>
                     </div>
-                    <figure class="product-demo"><figcaption><span>押韵共创</span><span>功能示意</span></figcaption><img class="product-illustration" src="assets/demo-rhyme.svg?v=2" width="640" height="400" alt="用香肠搜索双押词语，展示光芒、猖狂、枪膛等示例，再分享自己的押韵搭配" loading="lazy"></figure>
+                    <figure class="product-window"><figcaption class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-url">ya.zoci.pro</span><span class="window-note">功能示意</span></figcaption><img class="product-illustration" src="assets/demo-rhyme.svg?v=2" width="640" height="400" alt="用香肠搜索双押词语，展示光芒、猖狂、枪膛等示例，再分享自己的押韵搭配" loading="lazy"></figure>
                 </article>
-                <article class="product-card reveal">
- <div class="product-body"><p class="product-meta"><span class="product-index">02</span> 软云单词 <span class="product-category">打字背单词</span></p><h3>敲一遍单词，让记忆更扎实</h3><p class="product-description">选择适合你的词库，把单词拼写、发音与释义连在一起，在键盘练习中积累词汇。</p><ul class="product-features"><li>选择词库，练习拼写与听写</li><li>回顾错词，查看学习记录</li></ul><a class="product-cta" href="https://words.zoci.pro" target="_blank" rel="noopener noreferrer">开始单词练习 <svg><use href="#arrow-up"/></svg></a><span class="product-domain">words.zoci.pro · 电脑键盘练习</span></div>
- <figure class="product-demo words-demo"><figcaption><span>软云单词</span><span>功能示意</span></figcaption><img class="product-illustration" src="assets/demo-words.svg" width="640" height="400" alt="单词拼写、发音与键盘输入，连接到正确反馈" loading="lazy"></figure>
-</article>
-                <article class="product-card reveal">
- <div class="product-body"><p class="product-meta"><span class="product-index">03</span> 软云专注 <span class="product-category">声音与专注</span></p><h3>混合喜欢的声音，进入自己的节奏</h3><p class="product-description">把雨声、海浪和咖啡馆叠在一起，调出适合工作、学习或休息的背景声。</p><ul class="product-features"><li>自由混音，收藏并保存声音组合</li><li>搭配番茄钟与睡眠定时器</li></ul><a class="product-cta" href="https://focus.zoci.pro" target="_blank" rel="noopener noreferrer">进入专注空间 <svg><use href="#arrow-up"/></svg></a><span class="product-domain">focus.zoci.pro · 无需登录</span></div>
- <figure class="product-demo focus-demo"><figcaption><span>软云专注</span><span>功能示意</span></figcaption><img class="product-illustration" src="assets/demo-focus.svg" width="640" height="400" alt="雨声、海浪和咖啡馆汇入可调节的声音混音器" loading="lazy"></figure>
-</article>
-                <article class="product-card reveal">
-                    <div class="product-body">
-                        <p class="product-meta"><span class="product-index">04</span> SBTI 人格测试 <span class="product-category">趣味测试</span></p>
-                        <h3>答一组题，看看你是哪种人格</h3>
-                        <p class="product-description">根据日常想法和习惯作答，得到你的趣味人格类型、匹配度与性格解读。</p>
-                        <ul class="product-features"><li>完成问卷，查看主类型和对应解读</li><li>用 15 个维度呈现你的答题倾向</li></ul>
-                        <a class="product-cta" href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="开始 SBTI 趣味人格测试（新窗口打开）">开始人格测试 <svg><use href="#arrow-up"/></svg></a>
-                        <span class="product-domain">sbti.zoci.pro</span>
+                <article class="product-card tone-words reveal">
+                    <div class="product-head"><span class="product-index">02</span><span class="product-tag">打字背单词</span><span class="product-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></div>
+                    <div class="product-copy">
+                        <h3><span class="product-name">软云单词</span>敲一遍单词，让记忆更扎实</h3>
+                        <p class="product-description">选择适合你的词库，把拼写、发音与释义连在一起，在键盘练习中积累词汇。</p>
+                        <ul class="product-features"><li>拼写与听写练习</li><li>错词回顾与学习记录</li></ul>
+                        <a class="product-cta" href="https://words.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="开始单词练习（新窗口打开）">开始单词练习 <svg aria-hidden="true" focusable="false"><use href="#arrow-right"/></svg></a>
                     </div>
-                    <figure class="product-demo sbti-demo"><figcaption><span>SBTI 人格测试</span><span>功能示意</span></figcaption><img class="product-illustration" src="assets/demo-sbti.svg" width="640" height="400" alt="日常选项连接到人格类型、解读与十五维度结果" loading="lazy"></figure>
+                    <figure class="product-window"><figcaption class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-url">words.zoci.pro</span><span class="window-note">功能示意</span></figcaption><img class="product-illustration" src="assets/demo-words.svg" width="640" height="400" alt="单词拼写、发音与键盘输入，连接到正确反馈" loading="lazy"></figure>
+                </article>
+                <article class="product-card tone-focus reveal">
+                    <div class="product-head"><span class="product-index">03</span><span class="product-tag">声音与专注</span><span class="product-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></div>
+                    <div class="product-copy">
+                        <h3><span class="product-name">软云专注</span>混合喜欢的声音，进入自己的节奏</h3>
+                        <p class="product-description">把雨声、海浪和咖啡馆叠在一起，调出适合工作、学习或休息的背景声。</p>
+                        <ul class="product-features"><li>自由混音与收藏</li><li>番茄钟与睡眠定时</li><li>无需登录</li></ul>
+                        <a class="product-cta" href="https://focus.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="进入专注空间（新窗口打开）">进入专注空间 <svg aria-hidden="true" focusable="false"><use href="#arrow-right"/></svg></a>
+                    </div>
+                    <figure class="product-window"><figcaption class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-url">focus.zoci.pro</span><span class="window-note">功能示意</span></figcaption><img class="product-illustration" src="assets/demo-focus.svg" width="640" height="400" alt="雨声、海浪和咖啡馆汇入可调节的声音混音器" loading="lazy"></figure>
+                </article>
+                <article class="product-card tone-sbti reveal">
+                    <div class="product-head"><span class="product-index">04</span><span class="product-tag">趣味测试</span><span class="product-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></div>
+                    <div class="product-copy">
+                        <h3><span class="product-name">SBTI 人格测试</span>答一组题，看看你是哪种人格</h3>
+                        <p class="product-description">根据日常想法和习惯作答，得到你的趣味人格类型、匹配度与性格解读。</p>
+                        <ul class="product-features"><li>主类型与对应解读</li><li>15 个维度呈现答题倾向</li></ul>
+                        <a class="product-cta" href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer" aria-label="开始 SBTI 趣味人格测试（新窗口打开）">开始人格测试 <svg aria-hidden="true" focusable="false"><use href="#arrow-right"/></svg></a>
+                    </div>
+                    <figure class="product-window"><figcaption class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-url">sbti.zoci.pro</span><span class="window-note">功能示意</span></figcaption><img class="product-illustration" src="assets/demo-sbti.svg" width="640" height="400" alt="日常选项连接到人格类型、解读与十五维度结果" loading="lazy"></figure>
                 </article>
             </div>
         </section>
+
         <section class="tools section container" id="tools" aria-labelledby="tools-title">
-            <div class="section-heading">
-                <div><p class="eyebrow">02 / 常用工具</p><h2 id="tools-title">日常小事，<span>顺手搞定。</span></h2></div>
+            <div class="section-heading reveal">
+                <div>
+                    <p class="eyebrow"><span class="eyebrow-index">02</span> 常用工具</p>
+                    <h2 id="tools-title">日常小事，<span class="gradient-text">顺手搞定。</span></h2>
+                </div>
                 <p>5 个顺手的站内工具，<br>编辑、创作和整理，都在这里。</p>
             </div>
             <div class="tools-grid">
-                <a class="tool-card" href="/tools/bm/">
-                    <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18"/></svg></span>
+                <a class="tool-card reveal" href="/tools/bm/">
+                    <span class="tool-top"><span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18"/></svg></span><span class="tool-index">T—01</span></span>
                     <span class="tool-copy"><strong>编码工具箱</strong><span>编码、Base64、MD5 与图片转换</span></span>
-                    <svg class="tool-arrow" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg>
+                    <span class="tool-go">打开 <svg aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span>
                 </a>
-                <a class="tool-card" href="/tools/png/">
-                    <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></svg></span>
+                <a class="tool-card reveal" href="/tools/png/">
+                    <span class="tool-top"><span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></svg></span><span class="tool-index">T—02</span></span>
                     <span class="tool-copy"><strong>批量图片处理</strong><span>压缩、改尺寸、格式转换与打包下载</span></span>
-                    <svg class="tool-arrow" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg>
+                    <span class="tool-go">打开 <svg aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span>
                 </a>
-                <a class="tool-card" href="/tools/wzry-name/">
-                    <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m4 17 1-11 7 5 7-5 1 11zm2 4h12M12 3v3"/></svg></span>
+                <a class="tool-card reveal" href="/tools/wzry-name/">
+                    <span class="tool-top"><span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m4 17 1-11 7 5 7-5 1 11zm2 4h12M12 3v3"/></svg></span><span class="tool-index">T—03</span></span>
                     <span class="tool-copy"><strong>王者重复名</strong><span>王者荣耀重复名、空白名生成</span></span>
-                    <svg class="tool-arrow" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg>
+                    <span class="tool-go">打开 <svg aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span>
                 </a>
-                <a class="tool-card" href="/tools/mars-editor/">
-                    <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8m-9 4 2-6 7-7a2 2 0 0 1 3 3l-7 7-5 2Z"/></svg></span>
+                <a class="tool-card reveal" href="/tools/mars-editor/">
+                    <span class="tool-top"><span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8m-9 4 2-6 7-7a2 2 0 0 1 3 3l-7 7-5 2Z"/></svg></span><span class="tool-index">T—04</span></span>
                     <span class="tool-copy"><strong>软云排版</strong><span>基于 md-wechat 的公众号排版编辑器</span></span>
-                    <svg class="tool-arrow" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg>
+                    <span class="tool-go">打开 <svg aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span>
                 </a>
-                <a class="tool-card" href="/tools/life-list/">
-                    <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 6 2 2 3-4m-5 9 2 2 3-4m-5 9 2 2 3-4M12 6h9m-9 7h9m-9 7h9"/></svg></span>
+                <a class="tool-card reveal" href="/tools/life-list/">
+                    <span class="tool-top"><span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 6 2 2 3-4m-5 9 2 2 3-4m-5 9 2 2 3-4M12 6h9m-9 7h9m-9 7h9"/></svg></span><span class="tool-index">T—05</span></span>
                     <span class="tool-copy"><strong>人生清单</strong><span>记录人生目标，查看完成进度</span></span>
-                    <svg class="tool-arrow" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg>
+                    <span class="tool-go">打开 <svg aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span>
                 </a>
             </div>
-            <p class="tools-source">直接在本站使用，无需登录。文件在本地处理，清单与收藏保存在当前浏览器。</p>
+            <p class="tools-source"><svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#sparkle"/></svg> 直接在本站使用，无需登录。文件在本地处理，清单与收藏保存在当前浏览器。</p>
         </section>
-        <section class="about section container" id="about" aria-labelledby="about-title">
-            <div class="about-intro reveal"><p class="eyebrow">03 / THE WAY WE THINK</p><svg class="about-symbol" aria-hidden="true" focusable="false"><use href="#asterisk"/></svg></div>
-            <div class="about-content reveal"><h2 id="about-title">技术的意义，<br>在于<span>与你有关。</span></h2><p>我们相信，AI 应该走进日常。<br>从押韵创作、单词练习，到专注时光与自我发现，<br class="desktop-break">我们把每一次探索，做成用得上的产品。</p><p class="about-belief">保持好奇，持续创造。好的技术，应该被更多人用上。</p><div class="about-stats"><div><strong>04<span><svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span></strong><span>上线产品</span></div><div><strong>05</strong><span>常用工具</span></div><div><strong>∞</strong><span>探索可能</span></div></div></div>
+
+        <section class="about section" id="about" aria-labelledby="about-title">
+            <div class="container">
+                <p class="eyebrow reveal"><span class="eyebrow-index">03</span> THE WAY WE THINK</p>
+                <h2 id="about-title" class="manifesto" data-manifesto>技术的意义，在于与你有关。我们相信 AI 应该走进日常——从押韵创作、单词练习，到专注时光与自我发现，把每一次探索，做成用得上的产品。</h2>
+                <div class="principles">
+                    <div class="principle reveal"><span class="principle-index">i.</span><strong>好奇心驱动</strong><p>先做自己想用的东西，再把它打磨到别人也想用。</p></div>
+                    <div class="principle reveal"><span class="principle-index">ii.</span><strong>简单好用</strong><p>打开就能上手，少一步注册，少一点等待。</p></div>
+                    <div class="principle reveal"><span class="principle-index">iii.</span><strong>为每个人创造</strong><p>好的技术，应该被更多人用上，而不只是被看见。</p></div>
+                </div>
+                <div class="about-stats reveal">
+                    <div><strong data-count="4">04</strong><span>上线产品</span></div>
+                    <div><strong data-count="5">05</strong><span>常用工具</span></div>
+                    <div><strong>∞</strong><span>探索可能</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-band container reveal" aria-labelledby="cta-title">
+            <div class="cta-card">
+                <div class="cta-glow" aria-hidden="true"></div>
+                <svg class="cta-mark" aria-hidden="true" focusable="false"><use href="#asterisk"/></svg>
+                <h2 id="cta-title">从一个小工具开始，<br>让想象成为日常。</h2>
+                <div class="cta-actions">
+                    <a class="button-primary is-light" href="https://ya.zoci.pro" target="_blank" rel="noopener noreferrer"><span>试试押韵共创</span><span class="button-orb"><svg aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></span></a>
+                    <a class="button-ghost is-light" href="#tools">浏览全部工具</a>
+                </div>
+            </div>
         </section>
     </main>
-    <footer class="footer container"><div class="footer-top"><a href="#top" class="footer-wordmark" aria-label="软云网络，返回顶部">softcloud<span>®</span></a><a href="#top" class="back-top" aria-label="返回顶部">↑</a></div><div class="footer-bottom"><p>© 2026 软云网络 · 用 AI 创造价值</p><nav aria-label="产品链接"><a href="https://ya.zoci.pro" target="_blank" rel="noopener noreferrer">押韵共创 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a><a href="https://words.zoci.pro" target="_blank" rel="noopener noreferrer">软云单词 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a><a href="https://focus.zoci.pro" target="_blank" rel="noopener noreferrer">软云专注 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a><a href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer">SBTI <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a></nav><span>MADE OF CURIOSITY.</span></div></footer>
-    <script src="script.js?v=17" defer></script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a class="brand" href="#top" aria-label="软云网络，返回顶部"><img src="assets/brand-icon.png" width="30" height="30" alt=""><span class="brand-word">softcloud<span class="brand-period">.</span></span></a>
+                    <p>软云网络 · 让想象，成为日常。<br>MADE OF CURIOSITY.</p>
+                </div>
+                <nav class="footer-col" aria-label="产品链接">
+                    <h3>产品</h3>
+                    <a href="https://ya.zoci.pro" target="_blank" rel="noopener noreferrer">押韵共创 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a>
+                    <a href="https://words.zoci.pro" target="_blank" rel="noopener noreferrer">软云单词 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a>
+                    <a href="https://focus.zoci.pro" target="_blank" rel="noopener noreferrer">软云专注 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a>
+                    <a href="https://sbti.zoci.pro" target="_blank" rel="noopener noreferrer">SBTI 人格测试 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a>
+                </nav>
+                <nav class="footer-col" aria-label="工具链接">
+                    <h3>工具</h3>
+                    <a href="/tools/bm/">编码工具箱</a>
+                    <a href="/tools/png/">批量图片处理</a>
+                    <a href="/tools/wzry-name/">王者重复名</a>
+                    <a href="/tools/mars-editor/">软云排版</a>
+                    <a href="/tools/life-list/">人生清单</a>
+                </nav>
+                <nav class="footer-col" aria-label="更多">
+                    <h3>更多</h3>
+                    <a href="#about">关于我们</a>
+                    <a href="/tools/credits.html">开源许可</a>
+                    <a href="#top" class="back-top">返回顶部 <svg class="inline-icon" aria-hidden="true" focusable="false"><use href="#arrow-up"/></svg></a>
+                </nav>
+            </div>
+            <div class="footer-bottom"><p>© <span id="year">2026</span> 软云网络 · 用 AI 创造价值</p><span>zoci.pro</span></div>
+            <div class="footer-wordmark" aria-hidden="true">softcloud</div>
+        </div>
+    </footer>
+    <script src="script.js?v=18" defer></script>
 </body>
 </html>
